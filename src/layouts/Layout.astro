@@ -1,23 +1,265 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title = "Pixel Test - Free Online Monitor & Screen Dead Pixel Tester",
+  description = "Run a free online pixel test and dead pixel check on any monitor, laptop, TV, or phone screen. Test RGB colors in fullscreen and revive stuck pixels instantly.",
+  canonicalUrl = "https://aipixeltest.com"
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+    <link rel="shortcut icon" href="/favicon.ico?v=2" />
+    <link rel="apple-touch-icon" href="/favicon.svg?v=2" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="pixel test, dead pixel test, monitor pixel test, stuck pixel test, monitor dead pixel test, screen pixel test, screen dead pixel test, dead pixel tester, screen pixel, screen pixel size, phone screen pixel size, dead pixel check, stuck pixel fixer" />
+    <meta name="author" content="PixelTest AI" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="PixelTest AI" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://aipixeltest.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PixelTest AI - Online Monitor Dead Pixel Test and Stuck Pixel Fixer" />
+
+    <!-- Twitter / X -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://aipixeltest.com/og-image.png" />
+    <meta property="twitter:image:alt" content="PixelTest AI Screen Diagnostic Tool" />
+
+    <!-- Theme Initialization Script -->
+    <script is:inline>
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'light') {
+          document.documentElement.classList.add('light');
+        } else if (storedTheme === 'dark') {
+          document.documentElement.classList.remove('light');
+        } else {
+          document.documentElement.classList.remove('light');
+        }
+      })();
+    </script>
+
+    <!-- Google Fonts: Inter with ss03 & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data (JSON-LD): WebApplication -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PixelTest AI",
+        "url": "https://aipixeltest.com",
+        "description": "Free online full-screen dead pixel tester, screen pixel size calculator, and stuck subpixel fixer tool for monitors and phones.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All (Windows, macOS, Linux, iOS, Android)",
+        "browserRequirements": "Requires JavaScript. Requires HTML5 Fullscreen API support.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Full-screen RGB dead pixel test",
+          "Monitor pixel test and stuck pixel test",
+          "Screen pixel size and phone screen pixel pitch analysis",
+          "Targeted 60fps stuck pixel fixer noise flasher",
+          "Backlight bleed & uniformity detector",
+          "Live display resolution & refresh rate detection"
+        ]
+      }
+    </script>
+
+    <!-- Structured Data (JSON-LD): HowTo -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Test Your Screen for Dead and Stuck Pixels",
+        "description": "Step-by-step instructions to run an online monitor pixel test and inspect any display for dead pixels, stuck pixels, or backlight bleed.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Clean the Display Surface",
+            "text": "Wipe your monitor or phone screen gently with a clean microfiber cloth to remove dust and smudges before starting the test."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Launch Fullscreen Pixel Test",
+            "text": "Click the Launch Fullscreen Test button or press F11 to fill the entire display with solid testing colors."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Inspect Pure White & Black Screens",
+            "text": "Check the pure white screen for dark/black specks (dead pixels), and the pure black screen for bright colored dots (stuck pixels)."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Cycle Primary RGB Colors",
+            "text": "Use the arrow keys or spacebar to cycle through pure Red, Green, and Blue screens to evaluate individual subpixel health."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Apply the Stuck Pixel Fixer",
+            "text": "If you spot a stuck red, green, or blue subpixel, place the 60FPS noise flasher box directly over it for 10 to 30 minutes to unstick the crystal."
+          }
+        ]
+      }
+    </script>
+
+    <!-- Structured Data (JSON-LD): Comprehensive FAQPage (Google Rich Snippets) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do you test for dead pixels?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "To test for dead pixels, wipe your screen with a clean microfiber cloth and open an online pixel test in native full-screen mode. Cycle through solid contrasting backgrounds—specifically pure white, pure black, red, green, and blue. Closely scan the display for tiny specks that fail to match the background color, such as dark spots on a white screen (dead pixels) or bright colored specks on a black screen (stuck pixels)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I fix a dead pixel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A genuinely dead pixel is caused by a permanently defective or unpowered micro-transistor and generally cannot be repaired via software. However, if the subpixel is merely 'stuck' (frozen in a solid red, green, or blue state), you can often revive it using an online high-speed pixel flasher or through gentle targeted pressure with a damp microfiber cloth. If a dead pixel persists on a newly purchased device, check the manufacturer's warranty for an RMA replacement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is a dead pixel a big deal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In most cases, an isolated dead pixel is a minor cosmetic defect rather than a critical system failure. On high-resolution smartphone screens (400+ PPI), a single dead pixel is microscopic and virtually invisible from standard distances. However, on larger desktop monitors or for professional photo/video editors, dead pixels—especially near the center of the display—can be distracting and may reduce the device's resale value."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How to test dead pixel on Android?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can test for dead pixels on Android by opening a web-based pixel tester in Chrome, tapping 'Launch Fullscreen Test', and swiping across solid colors (black, white, red, green, blue). On Samsung Galaxy devices, you can also open the phone dialer and enter the diagnostic secret code *#0*# to launch the hardware test menu directly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can dead pixels disappear?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "True dead pixels with severed electrical connections rarely disappear on their own. However, stuck pixels or pixels with temporary contact resistance fluctuations caused by temperature changes, thermal expansion, or mechanical flexing can occasionally dislodge or resume normal operation spontaneously over time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I repair dead pixels online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Online tools cannot physically resolder a broken internal transistor. However, online pixel fixers can successfully repair stuck pixels. These tools rapidly flip subpixels between active and inactive states 60 times per second, generating thousands of electrical cycles per minute to agitate and release frozen liquid crystal molecules without requiring downloads."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are dead pixels harmful?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, dead pixels are completely harmless to your device's hardware, operating system, and personal safety. They do not emit radiation, do not consume excess battery power, and do not pose a danger to the rest of the display panel."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are dead pixels permanent?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, genuine dead pixels (transistor channels that receive zero power and remain permanently black) are typically permanent hardware faults requiring panel replacement. In contrast, stuck pixels (glowing red, green, or blue subpixels) are often temporary and can be revived with software stimulation tools."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can dead pixels spread?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dead pixels do not spread electronically because each pixel operates on its own dedicated Thin-Film Transistor (TFT). However, if dead pixels were caused by blunt impact shock, frame flex, or liquid crystal fluid leakage, that physical fracture can widen over time, causing adjacent pixels to fail."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you ignore a dead pixel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, you can safely ignore a dead pixel if it does not interfere with your daily viewing. It will not cause surrounding pixels to deteriorate or damage monitor hardware. Many users only spot dead pixels when viewing full-screen solid white pages."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do phones get dead pixels?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Smartphones develop dead pixels through silicon manufacturing imperfections, drop impacts that crack the internal AMOLED/OLED substrate, tight pocket compression, moisture intrusion, or excessive internal heat that degrades subpixel electrical traces over time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can dead pixels get worse?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Isolated factory dead pixels generally remain unchanged throughout the life of the display. However, if the dead pixel originated from drops, physical bending, or trauma, daily mechanical handling and thermal expansion can cause the microscopic internal fracture to propagate, causing neighbor pixels to fail."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How to detect dead pixels?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The most reliable method to detect dead pixels is to use an online full-screen pixel tester in a dark or dimly lit room. Wipe off surface dust with a microfiber cloth, launch a pure solid white background to reveal dark dead pixels, and switch to a solid black background to expose bright stuck or hot subpixels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do dead pixels look like on a phone?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On a phone screen, a dead pixel appears as an inert, microscopic black speck or tiny square that never illuminates, regardless of what app or image is displayed. On dense smartphone screens (400–500 PPI), a single dead pixel is roughly 50 microns wide (about the thickness of a human hair) and is most noticeable on solid white backgrounds."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-canvas text-ink antialiased selection:bg-accent-red selection:text-white">
+    <slot />
+  </body>
+</html>

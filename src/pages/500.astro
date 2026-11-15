@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="500 - Internal Server Error | PixelTest AI"
+  description="Internal server error on PixelTest AI. Our rendering pipeline encountered an unexpected issue. Please reload or return to the main homepage."
+  canonicalUrl="https://aipixeltest.com/500"
+>
+  <Header />
+
+  <main class="py-20 md:py-32 flex items-center justify-center">
+    <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <!-- 500 Hardware Warning Visual Badge -->
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-surface-elevated border border-hairline shadow-md mx-auto relative group">
+        <!-- Raycast Accent Yellow/Amber Alert Indicator -->
+        <span class="w-3 h-3 rounded-full bg-accent-yellow animate-ping absolute"></span>
+        <span class="w-3 h-3 rounded-full bg-accent-yellow relative"></span>
+      </div>
+
+      <!-- Error Code & Heading -->
+      <div class="space-y-2">
+        <div class="text-xs font-mono tracking-widest text-accent-yellow uppercase font-semibold">
+          Error 500 • Pipeline Interrupted
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink font-sans">
+          Internal Server Error
+        </h1>
+      </div>
+
+      <p class="text-xs sm:text-sm text-mute leading-relaxed max-w-md mx-auto">
+        Our client-side rendering pipeline encountered an unexpected processing condition. This is usually transient and can be resolved by refreshing the page.
+      </p>
+
+      <!-- Raycast Action Buttons -->
+      <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+        <button 
+          id="btn-reload-page" 
+          class="raycast-pill-btn !py-2.5 !px-6 text-xs font-semibold cursor-pointer active:scale-95"
+        >
+          <span>Reload Page</span>
+          <span class="raycast-kbd !h-3.5 !min-w-[1rem] !px-1 text-[9px] ml-0.5">R</span>
+        </button>
+        <a 
+          href="/" 
+          class="px-4 py-2 rounded-full bg-surface-elevated hover:bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all"
+        >
+          Return Home
+        </a>
+      </div>
+
+      <!-- Quick Helpful Links -->
+      <div class="pt-8 border-t border-hairline flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-mute">
+        <a href="/#tester" class="hover:text-ink">Screen Test</a>
+        <span>•</span>
+        <a href="/#fixer" class="hover:text-ink">Pixel Fixer</a>
+        <span>•</span>
+        <a href="/contact" class="hover:text-ink">Report Issue</a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const reloadBtn = document.getElementById('btn-reload-page');
+  reloadBtn?.addEventListener('click', () => {
+    window.location.reload();
+  });
+</script>

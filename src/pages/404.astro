@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="404 - Page Not Found | PixelTest AI"
+  description="The display coordinate or page you requested could not be found. Return to the PixelTest AI homepage to test your screen for dead pixels."
+  canonicalUrl="https://aipixeltest.com/404"
+>
+  <Header />
+
+  <main class="py-20 md:py-32 flex items-center justify-center">
+    <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <!-- 404 Hardware Glitch Visual Badge -->
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-surface-elevated border border-hairline shadow-md mx-auto relative group">
+        <!-- Raycast Accent Red Signal Failure Indicator -->
+        <span class="w-3 h-3 rounded-full bg-accent-red animate-ping absolute"></span>
+        <span class="w-3 h-3 rounded-full bg-accent-red relative"></span>
+      </div>
+
+      <!-- Error Code & Heading -->
+      <div class="space-y-2">
+        <div class="text-xs font-mono tracking-widest text-accent-red uppercase font-semibold">
+          Error 404 • Signal Lost
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink font-sans">
+          Pixel Coordinate Not Found
+        </h1>
+      </div>
+
+      <p class="text-xs sm:text-sm text-mute leading-relaxed max-w-md mx-auto">
+        The page you are looking for has been moved, renamed, or does not exist on this display matrix. Check your URL or return to the main screen diagnostic tool.
+      </p>
+
+      <!-- Raycast Action Buttons -->
+      <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+        <a 
+          href="/" 
+          class="raycast-pill-btn !py-2.5 !px-6 text-xs font-semibold"
+        >
+          <span>Launch Screen Test</span>
+          <span class="raycast-kbd !h-3.5 !min-w-[1rem] !px-1 text-[9px] ml-0.5">H</span>
+        </a>
+        <a 
+          href="/contact" 
+          class="px-4 py-2 rounded-full bg-surface-elevated hover:bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all"
+        >
+          Report Dead Link
+        </a>
+      </div>
+
+      <!-- Quick Helpful Links -->
+      <div class="pt-8 border-t border-hairline flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-mute">
+        <a href="/#tester" class="hover:text-ink">Solid Colors</a>
+        <span>•</span>
+        <a href="/#fixer" class="hover:text-ink">Pixel Fixer</a>
+        <span>•</span>
+        <a href="/#diagnostics" class="hover:text-ink">Display Specs</a>
+        <span>•</span>
+        <a href="/#warranty-guide" class="hover:text-ink">Warranty Standards</a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

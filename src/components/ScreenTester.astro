@@ -1,0 +1,650 @@
+---
+// ScreenTester.astro - Core interactive display tester & fullscreen HUD with Raycast Design System
+---
+
+<section id="tester" class="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden border-b border-hairline">
+  
+  <!-- Raycast Signature Hero Red Diagonal Stripes Banner -->
+  <div class="raycast-hero-stripes">
+    <svg class="w-full h-full" viewBox="0 0 1200 240" fill="none" preserveAspectRatio="none">
+      <!-- 3 angled diagonal stripes matching Raycast hero banner -->
+      <path d="M150 -50 L350 290 L270 290 L70 -50 Z" fill="url(#raycast-stripe-grad)" opacity="0.4"/>
+      <path d="M380 -50 L580 290 L500 290 L300 -50 Z" fill="url(#raycast-stripe-grad)" opacity="0.3"/>
+      <path d="M610 -50 L810 290 L730 290 L530 -50 Z" fill="url(#raycast-stripe-grad)" opacity="0.15"/>
+      <defs>
+        <linearGradient id="raycast-stripe-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF5757"/>
+          <stop offset="100%" stop-color="#A1131A" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Hero Header (Clean, Zero Clownish Gradients) -->
+    <div class="text-center max-w-2xl mx-auto space-y-3.5">
+      
+      <!-- Top Badge (Raycast Pill Style) -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-hairline text-xs font-mono text-mute">
+        <span class="w-2 h-2 rounded-full bg-accent-red"></span>
+        <span>Online Display Diagnostics</span>
+      </div>
+
+      <!-- Solid, Professional Display Typography -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-ink font-sans leading-[1.1]">
+        Dead Pixel Test &<br />
+        <span class="text-ink">Stuck Pixel Fixer</span>
+      </h1>
+
+      <p class="text-sm sm:text-base text-mute leading-relaxed max-w-xl mx-auto font-sans">
+        Inspect monitor, laptop, TV, and smartphone screens in pure fullscreen with solid RGB colors. Spot defective subpixels and revive frozen liquid crystals.
+      </p>
+
+    </div>
+
+    <!-- Pre-test Microfiber Checklist Pill -->
+    <div class="mt-8 max-w-xl mx-auto p-3 rounded-lg bg-surface border border-hairline flex items-center gap-3 text-xs sm:text-sm text-charcoal shadow-xs">
+      <div class="w-6 h-6 shrink-0 rounded bg-surface-elevated border border-hairline flex items-center justify-center text-accent-yellow text-xs">
+        💡
+      </div>
+      <div class="flex-1 text-xs">
+        <strong class="text-ink font-medium">Screen Preparation:</strong> Wipe display with a clean microfiber cloth to avoid confusing surface dust with dead subpixels.
+      </div>
+    </div>
+
+    <!-- Main Command-Palette Style Tester Card -->
+    <div class="mt-6 raycast-card p-5 sm:p-7 bg-surface relative shadow-sm">
+      
+      <!-- Mode Tabs (Raycast pill tabs) -->
+      <div class="flex flex-wrap items-center justify-center gap-1.5 pb-5 border-b border-hairline">
+        <button 
+          id="tab-mode-solid"
+          class="test-mode-tab active px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-2 bg-surface-elevated text-ink border border-hairline shadow-xs cursor-pointer"
+          data-mode="solid"
+        >
+          <span class="w-2 h-2 rounded-full bg-accent-red"></span>
+          Solid Colors (RGB)
+        </button>
+        <button 
+          id="tab-mode-bleed"
+          class="test-mode-tab px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-2 text-mute hover:text-ink hover:bg-surface-elevated border border-transparent cursor-pointer"
+          data-mode="bleed"
+        >
+          <span class="w-2 h-2 rounded-full bg-stone"></span>
+          Backlight Bleed & Uniformity
+        </button>
+        <button 
+          id="tab-mode-gradient"
+          class="test-mode-tab px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-2 text-mute hover:text-ink hover:bg-surface-elevated border border-transparent cursor-pointer"
+          data-mode="gradient"
+        >
+          <span class="w-2 h-2 rounded-full bg-accent-blue"></span>
+          Color Banding & Gradients
+        </button>
+      </div>
+
+      <!-- Color Swatches Grid -->
+      <div class="py-5">
+        <div class="text-[11px] font-mono uppercase tracking-wider text-mute mb-3 text-center sm:text-left">
+          Select Starting Color Swatch:
+        </div>
+        
+        <div id="swatches-container" class="grid grid-cols-4 sm:grid-cols-8 gap-2 sm:gap-2.5">
+          <button class="color-swatch active group relative aspect-square rounded-md border-2 border-accent-red flex items-center justify-center transition-all p-1" data-color="#000000" data-name="Pure Black" style="background-color: #000000;">
+            <span class="text-[10px] font-mono font-medium text-white/90 drop-shadow">Black</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#FFFFFF" data-name="Pure White" style="background-color: #FFFFFF;">
+            <span class="text-[10px] font-mono font-medium text-black drop-shadow">White</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#FF0000" data-name="Pure Red" style="background-color: #FF0000;">
+            <span class="text-[10px] font-mono font-medium text-white drop-shadow">Red</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#00FF00" data-name="Pure Green" style="background-color: #00FF00;">
+            <span class="text-[10px] font-mono font-medium text-black drop-shadow">Green</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#0000FF" data-name="Pure Blue" style="background-color: #0000FF;">
+            <span class="text-[10px] font-mono font-medium text-white drop-shadow">Blue</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#00FFFF" data-name="Cyan" style="background-color: #00FFFF;">
+            <span class="text-[10px] font-mono font-medium text-black drop-shadow">Cyan</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#FF00FF" data-name="Magenta" style="background-color: #FF00FF;">
+            <span class="text-[10px] font-mono font-medium text-white drop-shadow">Magenta</span>
+          </button>
+          <button class="color-swatch group relative aspect-square rounded-md border border-hairline flex items-center justify-center transition-all p-1 hover:border-hairline-strong" data-color="#FFFF00" data-name="Yellow" style="background-color: #FFFF00;">
+            <span class="text-[10px] font-mono font-medium text-black drop-shadow">Yellow</span>
+          </button>
+        </div>
+
+        <!-- Custom Color & Speed Settings -->
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-mute pt-3 border-t border-hairline">
+          <div class="flex items-center gap-2">
+            <span>Custom Color:</span>
+            <input type="color" id="custom-color-picker" value="#1a1a2e" class="w-6 h-6 rounded border border-hairline bg-surface cursor-pointer" />
+            <span id="custom-color-hex" class="font-mono text-ink">#000000</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span>Cycle Speed:</span>
+            <select id="select-cycle-speed" class="bg-surface-elevated border border-hairline text-ink rounded px-2 py-0.5 font-mono text-xs cursor-pointer focus:outline-none">
+              <option value="1000">1s</option>
+              <option value="2000" selected>2s</option>
+              <option value="3000">3s</option>
+              <option value="5000">5s</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Action: Raycast White CTA Pill -->
+      <div class="pt-5 border-t border-hairline text-center space-y-4">
+        <button 
+          id="btn-start-fullscreen" 
+          class="raycast-pill-btn !py-3 !px-7 text-sm font-semibold shadow-md active:scale-[0.99] group"
+        >
+          <svg class="w-4 h-4 text-accent-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+          </svg>
+          <span>Launch Fullscreen Test</span>
+          <span class="raycast-kbd ml-1">F11 / F</span>
+        </button>
+
+        <!-- Keyboard Keycap Hints (Desktop) & Swipe Hint (Mobile) -->
+        <div class="hidden sm:flex flex-wrap items-center justify-center gap-3 text-xs text-mute font-mono">
+          <div class="flex items-center gap-1">
+            <span class="raycast-kbd">Space</span> / <span class="raycast-kbd">Click</span>
+            <span>Next</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="raycast-kbd">←</span> <span class="raycast-kbd">→</span>
+            <span>Navigate</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="raycast-kbd">A</span>
+            <span>Auto</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="raycast-kbd">X</span>
+            <span>Fixer Box</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="raycast-kbd">Esc</span>
+            <span>Exit</span>
+          </div>
+        </div>
+
+        <!-- Mobile Touch Gesture Hint (Phones) -->
+        <div class="sm:hidden flex items-center justify-center gap-2 text-xs text-mute font-mono bg-surface-elevated/60 py-2 px-3 rounded-lg border border-hairline">
+          <span class="text-accent-blue">📱 Mobile Mode:</span>
+          <span>Swipe <strong>←</strong> / <strong>→</strong> or tap to cycle</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FULLSCREEN CONTAINER (Overlay activated when test starts) -->
+  <div 
+    id="fullscreen-tester" 
+    class="fixed inset-0 z-50 hidden select-none cursor-pointer overflow-hidden"
+    tabindex="0"
+    style="background-color: #000000;"
+  >
+    <!-- Backlight Bleed / Uniformity Overlay -->
+    <div id="bleed-overlay" class="absolute inset-0 pointer-events-none hidden flex items-center justify-center">
+      <div class="absolute inset-x-0 top-0 h-1 bg-white/20"></div>
+      <div class="absolute inset-x-0 bottom-0 h-1 bg-white/20"></div>
+      <div class="absolute inset-y-0 left-0 w-1 bg-white/20"></div>
+      <div class="absolute inset-y-0 right-0 w-1 bg-white/20"></div>
+      <div class="text-center font-mono text-xs text-white/40 tracking-widest">
+        BACKLIGHT BLEED CHECK • INSPECT BEZEL EDGES
+      </div>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div id="gradient-overlay" class="absolute inset-0 pointer-events-none hidden"></div>
+
+    <!-- TARGETED DRAGGABLE STUCK PIXEL FIXER BOX -->
+    <div 
+      id="stuck-pixel-box" 
+      class="absolute z-30 hidden shadow-2xl border border-white/30 rounded-md overflow-hidden cursor-move bg-black"
+      style="width: 140px; height: 140px; top: 30%; left: 40%;"
+    >
+      <div class="h-5 bg-surface-elevated px-2 flex items-center justify-between text-[10px] font-mono text-mute border-b border-hairline">
+        <span>Pixel Fixer Box</span>
+        <button id="btn-close-stuck-box" class="hover:text-white cursor-pointer px-1">✕</button>
+      </div>
+      <canvas id="noise-canvas" class="w-full h-[calc(100%-20px)] block"></canvas>
+    </div>
+
+    <!-- FLOATING RAYCAST COMMAND DOCK -->
+    <div 
+      id="fullscreen-dock" 
+      class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 transform opacity-100 translate-y-0 max-w-[96vw]"
+    >
+      <div class="backdrop-blur-xl bg-surface/95 border border-hairline rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 shadow-2xl flex items-center gap-1.5 sm:gap-3 text-[11px] sm:text-xs font-mono text-ink whitespace-nowrap overflow-x-auto">
+        
+        <!-- Current Color Indicator -->
+        <div class="flex items-center gap-2 pr-3 border-r border-hairline">
+          <div id="dock-color-preview" class="w-3.5 h-3.5 rounded-full border border-hairline shadow-xs" style="background-color: #000000;"></div>
+          <span id="dock-color-name" class="font-medium font-sans">Pure Black</span>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center gap-1">
+          <button id="btn-dock-prev" class="p-1 rounded hover:bg-surface-elevated text-mute hover:text-ink active:scale-95 transition-all cursor-pointer" title="Previous (Left Arrow)">
+            ◀
+          </button>
+          <button id="btn-dock-next" class="p-1 rounded hover:bg-surface-elevated text-mute hover:text-ink active:scale-95 transition-all cursor-pointer" title="Next (Right Arrow / Space)">
+            ▶
+          </button>
+        </div>
+
+        <!-- Auto-Cycle Play/Pause -->
+        <button id="btn-dock-cycle" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-elevated border border-hairline text-mute hover:text-ink transition-all cursor-pointer">
+          <span id="cycle-icon">▶</span>
+          <span id="cycle-text">Auto</span>
+        </button>
+
+        <!-- Stuck Pixel Box Toggle -->
+        <button id="btn-dock-fixer" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent-red/15 border border-accent-red/30 text-accent-red hover:bg-accent-red/25 transition-all cursor-pointer">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent-red animate-ping"></span>
+          <span>Fixer Box</span>
+        </button>
+
+        <!-- Live Specs Pill -->
+        <div class="hidden md:flex items-center gap-1 text-[11px] text-mute px-2 border-l border-hairline">
+          <span id="dock-res-display">1920×1080</span>
+        </div>
+
+        <!-- Exit Button -->
+        <button id="btn-dock-exit" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-elevated hover:bg-hairline text-mute hover:text-ink transition-all cursor-pointer border border-hairline ml-1">
+          <span>Exit</span>
+          <span class="raycast-kbd !h-3.5 !min-w-[1rem] !px-1 text-[9px]">Esc</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Touch Hint -->
+    <div id="mobile-touch-hint" class="absolute top-6 left-1/2 -translate-x-1/2 z-40 px-3 py-1.5 rounded-full bg-black/75 border border-white/20 text-[11px] font-mono text-white/90 pointer-events-none transition-opacity duration-500 opacity-0 backdrop-blur">
+      Swipe Left/Right to change color • Double-tap for controls
+    </div>
+
+  </div>
+</section>
+
+<!-- Client Script for Fullscreen Tester Logic -->
+<script>
+  const standardColors = [
+    { name: "Pure Black", hex: "#000000", desc: "Best for stuck bright pixels & backlight bleed" },
+    { name: "Pure White", hex: "#FFFFFF", desc: "Best for dead black pixels & dark spots" },
+    { name: "Pure Red", hex: "#FF0000", desc: "Tests Red subpixel health & RGB alignment" },
+    { name: "Pure Green", hex: "#00FF00", desc: "Tests Green subpixel health (highest eye sensitivity)" },
+    { name: "Pure Blue", hex: "#0000FF", desc: "Tests Blue subpixel health" },
+    { name: "Cyan", hex: "#00FFFF", desc: "Green + Blue subpixels combination" },
+    { name: "Magenta", hex: "#FF00FF", desc: "Red + Blue subpixels combination" },
+    { name: "Yellow", hex: "#FFFF00", desc: "Red + Green subpixels combination" }
+  ];
+
+  let currentColorIndex = 0;
+  let activeMode = 'solid';
+  let autoCycleTimer: any = null;
+  let cycleIntervalMs = 2000;
+  let hideDockTimeout: any = null;
+  let isFixerRunning = false;
+  let animationFrameId: any = null;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  const fullscreenTester = document.getElementById('fullscreen-tester');
+  const btnStartFullscreen = document.getElementById('btn-start-fullscreen');
+  const swatches = document.querySelectorAll('.color-swatch');
+  const customColorPicker = document.getElementById('custom-color-picker') as HTMLInputElement;
+  const customColorHex = document.getElementById('custom-color-hex');
+  const selectCycleSpeed = document.getElementById('select-cycle-speed') as HTMLSelectElement;
+  
+  const fullscreenDock = document.getElementById('fullscreen-dock');
+  const dockColorPreview = document.getElementById('dock-color-preview');
+  const dockColorName = document.getElementById('dock-color-name');
+  const btnDockPrev = document.getElementById('btn-dock-prev');
+  const btnDockNext = document.getElementById('btn-dock-next');
+  const btnDockCycle = document.getElementById('btn-dock-cycle');
+  const cycleIcon = document.getElementById('cycle-icon');
+  const cycleText = document.getElementById('cycle-text');
+  const btnDockFixer = document.getElementById('btn-dock-fixer');
+  const btnDockExit = document.getElementById('btn-dock-exit');
+  const dockResDisplay = document.getElementById('dock-res-display');
+  const bleedOverlay = document.getElementById('bleed-overlay');
+  const gradientOverlay = document.getElementById('gradient-overlay');
+  const mobileTouchHint = document.getElementById('mobile-touch-hint');
+
+  const stuckPixelBox = document.getElementById('stuck-pixel-box');
+  const btnCloseStuckBox = document.getElementById('btn-close-stuck-box');
+  const noiseCanvas = document.getElementById('noise-canvas') as HTMLCanvasElement;
+
+  function applyColor(index: number) {
+    currentColorIndex = (index + standardColors.length) % standardColors.length;
+    const color = standardColors[currentColorIndex];
+
+    if (fullscreenTester && activeMode === 'solid') {
+      fullscreenTester.style.backgroundColor = color.hex;
+    }
+
+    if (dockColorPreview) dockColorPreview.style.backgroundColor = color.hex;
+    if (dockColorName) dockColorName.textContent = color.name;
+
+    swatches.forEach((swatch, idx) => {
+      if (idx === currentColorIndex) {
+        swatch.classList.add('border-accent-red');
+        swatch.classList.remove('border-hairline');
+      } else {
+        swatch.classList.remove('border-accent-red');
+        swatch.classList.add('border-hairline');
+      }
+    });
+  }
+
+  function nextColor() { applyColor(currentColorIndex + 1); }
+  function prevColor() { applyColor(currentColorIndex - 1); }
+
+  function toggleAutoCycle() {
+    if (autoCycleTimer) {
+      clearInterval(autoCycleTimer);
+      autoCycleTimer = null;
+      if (cycleIcon) cycleIcon.textContent = '▶';
+      if (cycleText) cycleText.textContent = 'Auto';
+    } else {
+      autoCycleTimer = setInterval(nextColor, cycleIntervalMs);
+      if (cycleIcon) cycleIcon.textContent = '⏸';
+      if (cycleText) cycleText.textContent = 'Pause';
+    }
+  }
+
+  function launchFullscreen() {
+    if (!fullscreenTester) return;
+    
+    fullscreenTester.classList.remove('hidden');
+    applyColor(currentColorIndex);
+
+    if (dockResDisplay) {
+      dockResDisplay.textContent = `${window.screen.width}×${window.screen.height} (${window.devicePixelRatio || 1}x)`;
+    }
+
+    if (fullscreenTester.requestFullscreen) {
+      fullscreenTester.requestFullscreen().catch(() => {});
+    }
+
+    fullscreenTester.focus();
+    resetDockTimer();
+
+    if (mobileTouchHint) {
+      mobileTouchHint.style.opacity = '1';
+      setTimeout(() => { mobileTouchHint.style.opacity = '0'; }, 3000);
+    }
+  }
+
+  function exitFullscreen() {
+    if (autoCycleTimer) {
+      clearInterval(autoCycleTimer);
+      autoCycleTimer = null;
+      if (cycleIcon) cycleIcon.textContent = '▶';
+      if (cycleText) cycleText.textContent = 'Auto';
+    }
+
+    stopNoiseGenerator();
+    if (stuckPixelBox) stuckPixelBox.classList.add('hidden');
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+
+    if (fullscreenTester) {
+      fullscreenTester.classList.add('hidden');
+    }
+  }
+
+  function resetDockTimer() {
+    if (fullscreenDock) {
+      fullscreenDock.style.opacity = '1';
+      fullscreenDock.style.transform = 'translate(-50%, 0)';
+    }
+
+    clearTimeout(hideDockTimeout);
+    hideDockTimeout = setTimeout(() => {
+      if (fullscreenDock && !stuckPixelBox?.contains(document.activeElement)) {
+        fullscreenDock.style.opacity = '0';
+        fullscreenDock.style.transform = 'translate(-50%, 15px)';
+      }
+    }, 2500);
+  }
+
+  function startNoiseGenerator() {
+    if (!noiseCanvas) return;
+    const ctx = noiseCanvas.getContext('2d');
+    if (!ctx) return;
+
+    noiseCanvas.width = 140;
+    noiseCanvas.height = 120;
+    isFixerRunning = true;
+
+    function renderNoise() {
+      if (!isFixerRunning) return;
+      const w = noiseCanvas.width;
+      const h = noiseCanvas.height;
+      const imgData = ctx!.createImageData(w, h);
+      const buffer = new Uint32Array(imgData.data.buffer);
+      const len = buffer.length;
+
+      for (let i = 0; i < len; i++) {
+        const r = (Math.random() * 255) | 0;
+        const g = (Math.random() * 255) | 0;
+        const b = (Math.random() * 255) | 0;
+        buffer[i] = (255 << 24) | (b << 16) | (g << 8) | r;
+      }
+
+      ctx!.putImageData(imgData, 0, 0);
+      animationFrameId = requestAnimationFrame(renderNoise);
+    }
+
+    renderNoise();
+  }
+
+  function stopNoiseGenerator() {
+    isFixerRunning = false;
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+  }
+
+  // Draggable Box
+  let isDragging = false;
+  let dragOffsetX = 0;
+  let dragOffsetY = 0;
+
+  if (stuckPixelBox) {
+    stuckPixelBox.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      dragOffsetX = e.clientX - stuckPixelBox.offsetLeft;
+      dragOffsetY = e.clientY - stuckPixelBox.offsetTop;
+      e.stopPropagation();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging && stuckPixelBox) {
+        stuckPixelBox.style.left = `${e.clientX - dragOffsetX}px`;
+        stuckPixelBox.style.top = `${e.clientY - dragOffsetY}px`;
+      }
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    stuckPixelBox.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      const t = e.touches[0];
+      dragOffsetX = t.clientX - stuckPixelBox.offsetLeft;
+      dragOffsetY = t.clientY - stuckPixelBox.offsetTop;
+      e.stopPropagation();
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging && stuckPixelBox) {
+        const t = e.touches[0];
+        stuckPixelBox.style.left = `${t.clientX - dragOffsetX}px`;
+        stuckPixelBox.style.top = `${t.clientY - dragOffsetY}px`;
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchend', () => { isDragging = false; });
+  }
+
+  btnStartFullscreen?.addEventListener('click', launchFullscreen);
+  btnDockExit?.addEventListener('click', exitFullscreen);
+  btnDockNext?.addEventListener('click', (e) => { e.stopPropagation(); nextColor(); });
+  btnDockPrev?.addEventListener('click', (e) => { e.stopPropagation(); prevColor(); });
+  btnDockCycle?.addEventListener('click', (e) => { e.stopPropagation(); toggleAutoCycle(); });
+
+  btnDockFixer?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (stuckPixelBox?.classList.contains('hidden')) {
+      stuckPixelBox.classList.remove('hidden');
+      startNoiseGenerator();
+    } else {
+      stuckPixelBox?.classList.add('hidden');
+      stopNoiseGenerator();
+    }
+  });
+
+  btnCloseStuckBox?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    stuckPixelBox?.classList.add('hidden');
+    stopNoiseGenerator();
+  });
+
+  swatches.forEach((swatch, idx) => {
+    swatch.addEventListener('click', () => { applyColor(idx); });
+  });
+
+  customColorPicker?.addEventListener('input', (e: any) => {
+    const val = e.target.value;
+    if (customColorHex) customColorHex.textContent = val.toUpperCase();
+    if (fullscreenTester) fullscreenTester.style.backgroundColor = val;
+    if (dockColorPreview) dockColorPreview.style.backgroundColor = val;
+    if (dockColorName) dockColorName.textContent = `Custom (${val.toUpperCase()})`;
+  });
+
+  selectCycleSpeed?.addEventListener('change', (e: any) => {
+    cycleIntervalMs = parseInt(e.target.value, 10);
+    if (autoCycleTimer) {
+      clearInterval(autoCycleTimer);
+      autoCycleTimer = setInterval(nextColor, cycleIntervalMs);
+    }
+  });
+
+  // Mode Tabs Handling
+  const tabs = document.querySelectorAll('.test-mode-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('bg-surface-elevated', 'text-ink', 'border-hairline', 'shadow-xs');
+        t.classList.add('text-mute', 'border-transparent');
+      });
+      tab.classList.add('bg-surface-elevated', 'text-ink', 'border-hairline', 'shadow-xs');
+      tab.classList.remove('text-mute', 'border-transparent');
+
+      activeMode = tab.getAttribute('data-mode') || 'solid';
+      
+      if (activeMode === 'bleed') {
+        bleedOverlay?.classList.remove('hidden');
+        gradientOverlay?.classList.add('hidden');
+        if (fullscreenTester) fullscreenTester.style.backgroundColor = '#000000';
+      } else if (activeMode === 'gradient') {
+        bleedOverlay?.classList.add('hidden');
+        gradientOverlay?.classList.remove('hidden');
+        if (gradientOverlay) {
+          gradientOverlay.style.background = 'linear-gradient(to right, #000000, #333333, #666666, #999999, #cccccc, #ffffff)';
+        }
+      } else {
+        bleedOverlay?.classList.add('hidden');
+        gradientOverlay?.classList.add('hidden');
+        applyColor(currentColorIndex);
+      }
+    });
+  });
+
+  fullscreenTester?.addEventListener('mousemove', resetDockTimer);
+  fullscreenTester?.addEventListener('click', (e) => {
+    if (!fullscreenDock?.contains(e.target as Node) && !stuckPixelBox?.contains(e.target as Node)) {
+      nextColor();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (fullscreenTester && !fullscreenTester.classList.contains('hidden')) {
+      switch (e.key) {
+        case ' ':
+        case 'ArrowRight':
+        case 'ArrowDown':
+          e.preventDefault();
+          nextColor();
+          resetDockTimer();
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          e.preventDefault();
+          prevColor();
+          resetDockTimer();
+          break;
+        case 'a':
+        case 'A':
+          e.preventDefault();
+          toggleAutoCycle();
+          resetDockTimer();
+          break;
+        case 'x':
+        case 'X':
+          e.preventDefault();
+          btnDockFixer?.click();
+          break;
+        case 'Escape':
+          exitFullscreen();
+          break;
+      }
+    } else {
+      if (e.key === 'f' || e.key === 'F') {
+        const activeTag = (document.activeElement?.tagName || '').toLowerCase();
+        if (activeTag !== 'input' && activeTag !== 'select' && activeTag !== 'textarea') {
+          e.preventDefault();
+          launchFullscreen();
+        }
+      }
+    }
+  });
+
+  fullscreenTester?.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    resetDockTimer();
+  }, { passive: true });
+
+  fullscreenTester?.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+
+    if (Math.abs(diffX) > 50 && Math.abs(diffY) < 100) {
+      if (diffX < 0) nextColor();
+      else prevColor();
+    }
+  }, { passive: true });
+
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && fullscreenTester && !fullscreenTester.classList.contains('hidden')) {
+      exitFullscreen();
+    }
+  });
+</script>

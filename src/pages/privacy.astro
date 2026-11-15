@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Privacy Policy | PixelTest AI"
+  description="Privacy Policy for aipixeltest.com. Learn how we respect your privacy with 100% client-side display testing, zero tracking cookies, and zero personal data collection."
+  canonicalUrl="https://aipixeltest.com/privacy"
+>
+  <Header />
+
+  <main class="py-12 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Title -->
+      <div class="space-y-3 mb-10 pb-8 border-b border-hairline">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-xs font-mono text-accent-blue">
+          <span>Trust & Privacy</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          Privacy Policy
+        </h1>
+        <p class="text-xs sm:text-sm text-mute font-mono">
+          Last Updated: November 16, 2026 • Effective Immediately
+        </p>
+      </div>
+
+      <!-- Content -->
+      <article class="space-y-8 text-xs sm:text-sm text-body leading-relaxed">
+        
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">1. Our Core Commitment: Zero Data Collection</h2>
+          <p>
+            At <strong class="text-ink">PixelTest AI</strong> (accessible from <a href="https://aipixeltest.com" class="text-accent-blue hover:underline">aipixeltest.com</a>), your digital privacy is our foremost priority. We have deliberately engineered this application to operate <strong class="text-ink">100% client-side</strong> within your web browser's local sandbox.
+          </p>
+          <p>
+            We do not require user accounts, passwords, email registrations, or personal identifying information to use our online pixel test, screen dead pixel test, or stuck pixel fixer tools.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">2. Information We Process</h2>
+          <div class="raycast-card p-4 bg-surface space-y-2">
+            <h3 class="font-semibold text-ink text-xs uppercase tracking-wider font-mono">Local Hardware Diagnostics Only</h3>
+            <p class="text-xs text-mute">
+              When you load our diagnostics page, your web browser executes client-side JavaScript to determine display attributes (such as screen width, screen height, pixel ratio, color depth, and estimated refresh rate). This data is processed purely in volatile memory on your local machine to render hardware metrics on your screen. <strong class="text-ink">None of this diagnostic information is ever transmitted, logged, or saved to our servers.</strong>
+            </p>
+          </div>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">3. Cookies and Local Storage</h2>
+          <p>
+            PixelTest AI does not use tracking cookies, advertising identifiers, or cross-site fingerprinting scripts. We utilize standard browser <code class="font-mono text-ink bg-surface-elevated px-1 py-0.5 rounded text-xs">localStorage</code> solely to remember your preferred UI theme selection (Light Mode or Dark Mode) across sessions. You can clear this at any time in your browser settings.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">4. Web Server Logs</h2>
+          <p>
+            Like most standard website hosting infrastructures (such as Cloudflare Pages and Vercel edge networks), basic technical request logs (including IP addresses, browser user-agent strings, referring URLs, and access timestamps) may be processed temporarily by network firewalls to mitigate Distributed Denial of Service (DDoS) attacks and ensure network stability. These logs are automatically purged on standard retention schedules and are never correlated with individual users.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">5. Third-Party Services & Links</h2>
+          <p>
+            Our website may occasionally reference external technical documentation, ISO display standards, or manufacturer warranty guidelines. If you click on an external hyperlink, you will be directed to that third party's domain. We encourage you to review the privacy notices of any external websites you visit.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">6. GDPR and CCPA Compliance</h2>
+          <p>
+            Because PixelTest AI does not collect, store, sell, or profile personal data, we adhere by design to the principles of the European General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">7. Contact Inquiries</h2>
+          <p>
+            If you have questions or suggestions regarding our Privacy Policy, please reach out to us via our <a href="/contact" class="text-accent-blue hover:underline">Contact Page</a> or by emailing <code class="font-mono text-ink bg-surface-elevated px-1 py-0.5 rounded text-xs">privacy@aipixeltest.com</code>.
+          </p>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

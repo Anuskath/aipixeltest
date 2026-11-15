@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="About Us | PixelTest AI"
+  description="Learn about PixelTest AI (aipixeltest.com) - our mission to provide modern, fast, zero-bloat display diagnostics and stuck pixel repair tools for consumers, gamers, and creatives."
+  canonicalUrl="https://aipixeltest.com/about"
+>
+  <Header />
+
+  <main class="py-12 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Title -->
+      <div class="space-y-3 mb-10 pb-8 border-b border-hairline">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-green/10 border border-accent-green/20 text-xs font-mono text-accent-green">
+          <span>Our Story & Mission</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          About PixelTest.AI
+        </h1>
+        <p class="text-xs sm:text-sm text-mute font-mono">
+          Engineered for modern high-refresh gaming monitors, OLED screens, laptops, and mobile displays.
+        </p>
+      </div>
+
+      <!-- Content -->
+      <article class="space-y-8 text-xs sm:text-sm text-body leading-relaxed">
+        
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">The Problem with Legacy Display Testers</h2>
+          <p>
+            When unboxing a brand-new monitor or buying a refurbished smartphone, the first thing any tech enthusiast does is check the panel for dead subpixels. However, when we searched for online screen testing tools, we discovered that the top-ranking websites were stuck in the 2008 era:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-mute">
+            <li>Cluttered with intrusive pop-up banners, video ads, and paywalls.</li>
+            <li>Incompatible with modern high-DPI Retina scaling and wide DCI-P3 color gamuts.</li>
+            <li>Horrible touch experiences on mobile phones and tablets.</li>
+            <li>Stuck pixel fixers that violently flashed the entire screen, causing eye strain and headache risks.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">Our Mission: Modern, Professional Utility</h2>
+          <p>
+            <strong class="text-ink">PixelTest AI</strong> was founded to redefine display testing with a modern developer-first philosophy inspired by clean design systems like Raycast and Linear. We believe basic hardware diagnostics should be:
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
+            <div class="raycast-card p-4 bg-surface">
+              <div class="font-mono text-xs font-semibold text-accent-red mb-1">⚡ Instant & Lightweight</div>
+              <p class="text-xs text-mute">Built on static architecture to load in under 200ms with zero heavy libraries or tracking bloat.</p>
+            </div>
+            <div class="raycast-card p-4 bg-surface">
+              <div class="font-mono text-xs font-semibold text-accent-green mb-1">🎯 Targeted Precision</div>
+              <p class="text-xs text-mute">A draggable mini 60FPS noise box so you can fix a stuck pixel without blinding the rest of your display.</p>
+            </div>
+            <div class="raycast-card p-4 bg-surface">
+              <div class="font-mono text-xs font-semibold text-accent-blue mb-1">📱 Mobile-First Gestures</div>
+              <p class="text-xs text-mute">Smooth touch swipes and responsive layout tuned for iPhones, iPads, and Android devices.</p>
+            </div>
+            <div class="raycast-card p-4 bg-surface">
+              <div class="font-mono text-xs font-semibold text-accent-yellow mb-1">🔒 100% Privacy by Design</div>
+              <p class="text-xs text-mute">Zero data storage, no logins, no tracking cookies, and 100% client-side execution in your browser.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">Technology Behind the Tool</h2>
+          <p>
+            PixelTest AI is built using <strong class="text-ink">Astro</strong> and <strong class="text-ink">Tailwind CSS v4</strong>, leveraging the native HTML5 Fullscreen API, HTML5 Canvas API, and modern Web Media Queries for real-time hardware detection (including wide-gamut DCI-P3 and high dynamic range).
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">Get in Touch</h2>
+          <p>
+            We are continuously improving PixelTest AI based on community feedback. Have an idea for a feature or spotted an issue? Visit our <a href="/contact" class="text-accent-blue hover:underline">Contact Page</a> to drop us a note!
+          </p>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  /* Default Dark Mode (Raycast Inky Theme) */
+  --color-canvas: #07080a;
+  --color-surface: #0d0d0d;
+  --color-surface-elevated: #101111;
+  --color-surface-card: #121212;
+  --color-hairline: #242728;
+  --color-hairline-soft: rgba(255, 255, 255, 0.08);
+  --color-hairline-strong: rgba(255, 255, 255, 0.16);
+  
+  --color-ink: #f4f4f6;
+  --color-body: #cdcdcd;
+  --color-mute: #9c9c9d;
+  --color-ash: #6a6b6c;
+  --color-stone: #434345;
+  
+  --color-accent-red: #ff6161;
+  --color-accent-green: #59d499;
+  --color-accent-blue: #57c1ff;
+  --color-accent-yellow: #ffc533;
+  
+  --primary-cta-bg: #ffffff;
+  --primary-cta-text: #000000;
+  --primary-cta-hover: #e8e8e8;
+
+  --keycap-bg-start: #1b1c1e;
+  --keycap-bg-end: #101113;
+  --keycap-border: #2d3034;
+  --keycap-text: #cdcdcd;
+}
+
+/* Light Mode Overrides */
+html.light {
+  --color-canvas: #ffffff;
+  --color-surface: #f9fafb;
+  --color-surface-elevated: #f3f4f6;
+  --color-surface-card: #ffffff;
+  --color-hairline: #e5e7eb;
+  --color-hairline-soft: rgba(0, 0, 0, 0.05);
+  --color-hairline-strong: rgba(0, 0, 0, 0.12);
+  
+  --color-ink: #0b0c0e;
+  --color-body: #4b5563;
+  --color-mute: #6b7280;
+  --color-ash: #9ca3af;
+  --color-stone: #d1d5db;
+  
+  --color-accent-red: #e11d48;
+  --color-accent-green: #059669;
+  --color-accent-blue: #2563eb;
+  --color-accent-yellow: #d97706;
+  
+  --primary-cta-bg: #07080a;
+  --primary-cta-text: #ffffff;
+  --primary-cta-hover: #1f2937;
+
+  --keycap-bg-start: #ffffff;
+  --keycap-bg-end: #f3f4f6;
+  --keycap-border: #d1d5db;
+  --keycap-text: #374151;
+}
+
+@theme {
+  --color-canvas: var(--color-canvas);
+  --color-surface: var(--color-surface);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-surface-card: var(--color-surface-card);
+  --color-hairline: var(--color-hairline);
+  --color-hairline-soft: var(--color-hairline-soft);
+  --color-hairline-strong: var(--color-hairline-strong);
+  
+  --color-ink: var(--color-ink);
+  --color-body: var(--color-body);
+  --color-mute: var(--color-mute);
+  --color-ash: var(--color-ash);
+  --color-stone: var(--color-stone);
+  
+  --color-accent-red: var(--color-accent-red);
+  --color-accent-green: var(--color-accent-green);
+  --color-accent-blue: var(--color-accent-blue);
+  --color-accent-yellow: var(--color-accent-yellow);
+  
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "calt", "kern", "liga", "ss03";
+    scroll-behavior: smooth;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Raycast Signature Red Diagonal Stripes Hero Banner */
+.raycast-hero-stripes {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 240px;
+  pointer-events: none;
+  opacity: 0.85;
+  mask-image: radial-gradient(ellipse at top center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at top center, black 40%, transparent 80%);
+}
+
+/* Raycast Universal CTA Pill */
+.raycast-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--primary-cta-bg);
+  color: var(--primary-cta-text);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.raycast-pill-btn:hover {
+  background-color: var(--primary-cta-hover);
+  transform: translateY(-1px);
+}
+
+.raycast-pill-btn:active {
+  transform: translateY(0);
+}
+
+/* Raycast 3D Tactile Keycap */
+.raycast-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(180deg, var(--keycap-bg-start) 0%, var(--keycap-bg-end) 100%);
+  border: 1px solid var(--keycap-border);
+  box-shadow: 0 1px 0 0 rgba(0,0,0,0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  color: var(--keycap-text);
+  user-select: none;
+}
+
+/* Raycast Command-Palette Style Card */
+.raycast-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: 0.625rem; /* 10px (rounded.lg in Raycast design system) */
+  transition: border-color 0.15s ease, background-color 0.2s ease;
+}
+
+.raycast-card:hover {
+  border-color: var(--color-hairline-strong);
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone);
+}

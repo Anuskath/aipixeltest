@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Terms & Conditions | PixelTest AI"
+  description="Terms and Conditions of use for aipixeltest.com. Review our usage guidelines, hardware repair disclaimers, and warranty reference policies."
+  canonicalUrl="https://aipixeltest.com/terms"
+>
+  <Header />
+
+  <main class="py-12 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Title -->
+      <div class="space-y-3 mb-10 pb-8 border-b border-hairline">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone/40 border border-hairline text-xs font-mono text-mute">
+          <span>Legal Agreement</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          Terms & Conditions
+        </h1>
+        <p class="text-xs sm:text-sm text-mute font-mono">
+          Last Updated: November 16, 2026
+        </p>
+      </div>
+
+      <!-- Content -->
+      <article class="space-y-8 text-xs sm:text-sm text-body leading-relaxed">
+        
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">1. Acceptance of Terms</h2>
+          <p>
+            By accessing or using <strong class="text-ink">aipixeltest.com</strong> ("PixelTest AI", "the Website", "our Service"), you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must refrain from using the Website.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">2. Permitted Use</h2>
+          <p>
+            PixelTest AI provides free online display diagnostic tools, screen color spectrum generators, and stuck pixel stimulation scripts for personal, educational, and commercial hardware inspection. You may use our service freely on any number of personal computers, laptops, televisions, tablets, and mobile devices.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">3. Physical Pressure & DIY Repair Disclaimer</h2>
+          <div class="p-4 rounded-lg bg-accent-red/10 border border-accent-red/30 space-y-2">
+            <h3 class="font-bold text-accent-red text-xs uppercase tracking-wider font-mono">⚠️ Important Hardware Notice</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              Any informational guides provided on this site regarding physical pressure, screen massage, or thermal stimulation are offered strictly for educational and informational reference. LCD, OLED, and Mini-LED display panels consist of fragile microscopic glass substrates. <strong class="text-ink">Applying physical force or excessive pressure to a screen carries inherent risk of cracking the internal glass layer, rupturing liquid crystal fluid, or causing permanent panel failure.</strong> Any physical troubleshooting you undertake is done entirely at your own discretion and risk. PixelTest AI accepts no responsibility or liability for hardware damage resulting from manual intervention.
+            </p>
+          </div>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">4. Photosensitivity & Flashing Light Warning</h2>
+          <p>
+            Our <strong class="text-ink">Stuck Pixel Fixer</strong> tool rapidly cycles RGB colors at high frequencies (up to 60Hz) to stimulate liquid crystal subpixels. A small percentage of individuals may experience epileptic seizures or light-triggered migraines when exposed to rapid flashing imagery. If you or anyone in your household has an epileptic condition or light sensitivity, do not look directly at the flashing noise box while the tool is operating.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">5. Manufacturer Warranty Information</h2>
+          <p>
+            The warranty summaries (such as Dell, Apple, Samsung, ASUS, and LG pixel defect standards) published on this website are compiled from public manufacturer specifications and ISO 13406-2 / ISO 9241-307 documentation for educational guidance. Manufacturers frequently update their return merchandise authorization (RMA) criteria based on model, manufacturing date, and region. You should verify your specific warranty tier directly with your device manufacturer before submitting an RMA claim.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">6. Limitation of Liability</h2>
+          <p>
+            The service is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied. In no event shall the authors or operators of PixelTest AI be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use this website.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">7. Changes to Terms</h2>
+          <p>
+            We reserve the right to revise these Terms and Conditions at any time. Continued use of the website following any modifications signifies your acceptance of the revised terms.
+          </p>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

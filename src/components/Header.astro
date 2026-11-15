@@ -1,0 +1,213 @@
+---
+// Header.astro - Raycast primary navigation with Mobile Menu & Theme Switcher
+---
+
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-canvas/85 border-b border-hairline transition-colors">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+    
+    <!-- Brand Logo with Custom Diagnostic Monitor Icon -->
+    <a href="/" class="flex items-center gap-2.5 group">
+      <div class="w-8 h-8 rounded-lg bg-surface-elevated border border-hairline flex items-center justify-center p-1.5 transition-colors group-hover:border-accent-red/60 shadow-xs">
+        <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+          <rect x="4" y="6" width="56" height="42" rx="6" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="3"/>
+          <line x1="24" y1="56" x2="40" y2="56" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="48" x2="32" y2="56" stroke="currentColor" stroke-width="3"/>
+          <rect x="28" y="22" width="8" height="8" rx="2" fill="#FF6161"/>
+          <circle cx="32" cy="26" r="1.5" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="font-bold tracking-tight text-ink text-base font-sans">PixelTest<span class="text-accent-red">.AI</span></span>
+        <span class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono tracking-wider bg-surface-elevated border border-hairline text-mute rounded">v2.0</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden md:flex items-center gap-6 text-xs sm:text-sm font-medium text-mute">
+      <a href="/#tester" class="hover:text-ink transition-colors">Screen Test</a>
+      <a href="/#fixer" class="hover:text-ink transition-colors flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-green"></span>
+        Pixel Fixer
+      </a>
+      <a href="/#diagnostics" class="hover:text-ink transition-colors">Display Specs</a>
+      <a href="/#warranty-guide" class="hover:text-ink transition-colors">Warranty</a>
+      <a href="/#faq" class="hover:text-ink transition-colors">FAQs</a>
+    </nav>
+
+    <!-- Header Actions (Resolution Pill, Theme Toggle, Start Test Pill, Mobile Menu Button) -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      
+      <!-- Live Screen Resolution Pill (Desktop) -->
+      <div id="header-res-pill" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-surface border border-hairline rounded-md text-charcoal">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse"></span>
+        <span id="header-res-text">Detecting...</span>
+      </div>
+
+      <!-- Theme Switcher Button (Dark / Light Mode) -->
+      <button 
+        id="btn-theme-toggle"
+        class="w-8 h-8 rounded-lg bg-surface border border-hairline flex items-center justify-center text-mute hover:text-ink transition-colors cursor-pointer"
+        title="Toggle Light / Dark Mode"
+        aria-label="Toggle Theme"
+      >
+        <svg id="theme-sun-icon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="theme-moon-icon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <!-- Raycast Universal CTA Pill -->
+      <button 
+        id="header-start-btn" 
+        class="raycast-pill-btn !py-1.5 !px-3 sm:!px-3.5 !text-xs font-medium"
+        title="Start Fullscreen Test"
+      >
+        <span>Start</span>
+        <span class="hidden sm:inline">Test</span>
+        <span class="hidden sm:inline-flex raycast-kbd !h-3.5 !min-w-[1rem] !px-1 text-[9px] ml-0.5">F</span>
+      </button>
+
+      <!-- Mobile Hamburger Menu Button -->
+      <button 
+        id="btn-mobile-menu"
+        class="md:hidden w-8 h-8 rounded-lg bg-surface border border-hairline flex items-center justify-center text-mute hover:text-ink transition-colors cursor-pointer"
+        aria-label="Toggle navigation menu"
+      >
+        <svg id="icon-menu-open" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg id="icon-menu-close" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Drawer -->
+  <div id="mobile-drawer" class="hidden md:hidden border-b border-hairline bg-surface/95 backdrop-blur-xl px-4 py-4 space-y-3">
+    <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+      <a href="/#tester" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>🖥️</span> Screen Test
+      </a>
+      <a href="/#fixer" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>⚡</span> Pixel Fixer
+      </a>
+      <a href="/#diagnostics" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>🔍</span> Specs
+      </a>
+      <a href="/#warranty-guide" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>📜</span> Warranty
+      </a>
+      <a href="/#faq" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>❓</span> FAQs
+      </a>
+      <a href="/about" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>ℹ️</span> About Us
+      </a>
+    </div>
+
+    <div class="pt-2 border-t border-hairline flex items-center justify-between text-[11px] text-mute font-mono">
+      <a href="/privacy" class="hover:text-ink">Privacy Policy</a>
+      <span>•</span>
+      <a href="/terms" class="hover:text-ink">Terms</a>
+      <span>•</span>
+      <a href="/contact" class="hover:text-ink">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Theme Toggle
+  const themeToggleBtn = document.getElementById('btn-theme-toggle');
+  const sunIcon = document.getElementById('theme-sun-icon');
+  const moonIcon = document.getElementById('theme-moon-icon');
+
+  function updateThemeUI() {
+    const isLight = document.documentElement.classList.contains('light');
+    if (isLight) {
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+    } else {
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+    }
+  }
+
+  updateThemeUI();
+
+  themeToggleBtn?.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.contains('light');
+    if (isLight) {
+      document.documentElement.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    }
+    updateThemeUI();
+  });
+
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('btn-mobile-menu');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const iconMenuOpen = document.getElementById('icon-menu-open');
+  const iconMenuClose = document.getElementById('icon-menu-close');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isHidden = mobileDrawer?.classList.contains('hidden');
+    if (isHidden) {
+      mobileDrawer?.classList.remove('hidden');
+      iconMenuOpen?.classList.add('hidden');
+      iconMenuClose?.classList.remove('hidden');
+    } else {
+      mobileDrawer?.classList.add('hidden');
+      iconMenuOpen?.classList.remove('hidden');
+      iconMenuClose?.classList.add('hidden');
+    }
+  });
+
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileDrawer?.classList.add('hidden');
+      iconMenuOpen?.classList.remove('hidden');
+      iconMenuClose?.classList.add('hidden');
+    });
+  });
+
+  // Screen resolution detector
+  function updateHeaderResolution() {
+    const resText = document.getElementById('header-res-text');
+    if (resText) {
+      const w = window.screen.width;
+      const h = window.screen.height;
+      const dpr = window.devicePixelRatio || 1;
+      resText.textContent = `${w}×${h} (${dpr}x)`;
+    }
+  }
+
+  updateHeaderResolution();
+  window.addEventListener('resize', updateHeaderResolution);
+
+  const headerBtn = document.getElementById('header-start-btn');
+  headerBtn?.addEventListener('click', () => {
+    const mainBtn = document.getElementById('btn-start-fullscreen');
+    if (mainBtn) {
+      mainBtn.click();
+    }
+  });
+</script>

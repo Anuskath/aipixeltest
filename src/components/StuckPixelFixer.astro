@@ -1,0 +1,265 @@
+---
+// StuckPixelFixer.astro - Dedicated standalone stuck pixel reviver panel
+---
+
+<section id="fixer" class="py-16 md:py-24 border-b border-hairline bg-surface/30 relative">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-green/10 border border-accent-green/20 text-xs font-mono text-accent-green mb-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent-green"></span>
+          Subpixel Stimulation Utility
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink font-sans">
+          Stuck Pixel Reviver
+        </h2>
+        <p class="mt-1.5 text-mute text-xs sm:text-sm max-w-xl">
+          Liquid crystal sub-pixels occasionally lock in an "on" state. Rapid 60Hz color cycling stimulates the transistor matrix to release frozen crystals.
+        </p>
+      </div>
+
+      <!-- Success rate pill -->
+      <div class="p-3 rounded-lg bg-surface border border-hairline flex items-center gap-3 shrink-0">
+        <div class="text-2xl font-bold font-mono text-accent-green">~60%</div>
+        <div class="text-xs text-mute leading-tight">
+          Recovery rate<br /><span class="text-charcoal font-sans">for stuck subpixels</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Fixer Widget Card -->
+    <div class="raycast-card p-5 md:p-7 bg-surface relative overflow-hidden">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left: Noise Canvas Display Area -->
+        <div class="lg:col-span-7 flex flex-col items-center">
+          <div class="relative w-full max-w-md aspect-video bg-black rounded-lg border border-hairline overflow-hidden shadow-xs flex items-center justify-center">
+            
+            <canvas id="standalone-noise-canvas" class="w-full h-full block"></canvas>
+            
+            <!-- Idle Overlay -->
+            <div id="fixer-idle-overlay" class="absolute inset-0 bg-surface/90 flex flex-col items-center justify-center gap-2.5 p-4 text-center">
+              <div class="w-10 h-10 rounded-lg bg-surface-elevated border border-hairline flex items-center justify-center text-accent-green text-lg">
+                ⚡
+              </div>
+              <div class="text-sm font-semibold text-ink">Pixel Fixer Ready</div>
+              <div class="text-xs text-mute max-w-xs">
+                Select duration and click Start. Place this box directly over your stuck subpixel.
+              </div>
+            </div>
+
+            <!-- Active Running Indicator Badge -->
+            <div id="fixer-active-badge" class="absolute top-2.5 right-2.5 hidden px-2 py-0.5 rounded bg-black/80 border border-accent-green/40 text-[10px] font-mono text-accent-green flex items-center gap-1.5 backdrop-blur">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-green animate-ping"></span>
+              <span>RUNNING (60 FPS)</span>
+            </div>
+          </div>
+
+          <!-- Timer Countdown Display -->
+          <div class="mt-3.5 flex items-center gap-3 text-xs font-mono text-mute">
+            <div>Elapsed: <span id="time-elapsed" class="text-ink">00:00</span></div>
+            <div>•</div>
+            <div>Remaining: <span id="time-remaining" class="text-accent-green font-semibold">10:00</span></div>
+          </div>
+        </div>
+
+        <!-- Right: Controls & Presets -->
+        <div class="lg:col-span-5 space-y-5">
+          
+          <!-- Duration Selector -->
+          <div>
+            <label class="block text-[11px] font-mono uppercase tracking-wider text-mute mb-2">
+              Recommended Session Duration:
+            </label>
+            <div class="grid grid-cols-3 gap-2">
+              <button class="fixer-timer-btn active py-1.5 px-2 rounded-lg bg-surface-elevated text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="10">
+                10 Mins <span class="block text-[10px] text-mute">Standard</span>
+              </button>
+              <button class="fixer-timer-btn py-1.5 px-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="30">
+                30 Mins <span class="block text-[10px] text-mute">Deep Fix</span>
+              </button>
+              <button class="fixer-timer-btn py-1.5 px-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="60">
+                60 Mins <span class="block text-[10px] text-mute">Stubborn</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stimulation Mode -->
+          <div>
+            <label class="block text-[11px] font-mono uppercase tracking-wider text-mute mb-2">
+              Stimulation Algorithm:
+            </label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <button class="fixer-mode-btn active py-2 px-3 rounded-lg bg-surface-elevated text-ink border border-hairline transition-all cursor-pointer text-left" data-pattern="rgb">
+                <span class="font-medium block">RGB Static Noise</span>
+                <span class="text-[10px] text-mute">Randomized subpixels</span>
+              </button>
+              <button class="fixer-mode-btn py-2 px-3 rounded-lg bg-surface text-mute hover:text-ink border border-hairline transition-all cursor-pointer text-left" data-pattern="strobe">
+                <span class="font-medium block">Solid Strobe</span>
+                <span class="text-[10px] text-mute">Cycles R→G→B→W</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Start / Stop Action Buttons -->
+          <div class="pt-1 flex items-center gap-2.5">
+            <button 
+              id="btn-start-standalone-fixer" 
+              class="raycast-pill-btn flex-1 !bg-accent-green hover:!bg-emerald-400 !text-black font-semibold !py-2.5 !text-xs cursor-pointer"
+            >
+              <span>Start Fixer</span>
+              <span class="raycast-kbd !bg-black/20 !border-black/30 !text-black !h-3.5 !min-w-[1rem] text-[9px]">▶</span>
+            </button>
+            <button 
+              id="btn-stop-standalone-fixer" 
+              class="px-4 py-2 rounded-full bg-surface-elevated hover:bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer disabled:opacity-40"
+              disabled
+            >
+              Stop
+            </button>
+          </div>
+
+          <div class="text-[11px] text-mute leading-relaxed">
+            ⚠️ <strong>Notice:</strong> Rapid flashing pattern. Look away if you have photosensitive sensitivities or light-triggered migraines.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  let isStandaloneRunning = false;
+  let standaloneTimerInterval: any = null;
+  let standaloneDurationSeconds = 600;
+  let elapsedSeconds = 0;
+  let standalonePattern = 'rgb';
+  let standaloneRafId: any = null;
+
+  const canvas = document.getElementById('standalone-noise-canvas') as HTMLCanvasElement;
+  const idleOverlay = document.getElementById('fixer-idle-overlay');
+  const activeBadge = document.getElementById('fixer-active-badge');
+  const btnStart = document.getElementById('btn-start-standalone-fixer');
+  const btnStop = document.getElementById('btn-stop-standalone-fixer') as HTMLButtonElement;
+  const timeElapsed = document.getElementById('time-elapsed');
+  const timeRemaining = document.getElementById('time-remaining');
+  const timerButtons = document.querySelectorAll('.fixer-timer-btn');
+  const modeButtons = document.querySelectorAll('.fixer-mode-btn');
+
+  function formatTime(secs: number) {
+    const m = Math.floor(secs / 60).toString().padStart(2, '0');
+    const s = (secs % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  function renderStandaloneAnimation() {
+    if (!canvas || !isStandaloneRunning) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    if (standalonePattern === 'rgb') {
+      const w = canvas.width;
+      const h = canvas.height;
+      const imgData = ctx.createImageData(w, h);
+      const buf = new Uint32Array(imgData.data.buffer);
+      const len = buf.length;
+      for (let i = 0; i < len; i++) {
+        const r = (Math.random() * 255) | 0;
+        const g = (Math.random() * 255) | 0;
+        const b = (Math.random() * 255) | 0;
+        buf[i] = (255 << 24) | (b << 16) | (g << 8) | r;
+      }
+      ctx.putImageData(imgData, 0, 0);
+    } else {
+      const strobeColors = ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF', '#000000'];
+      const pick = strobeColors[Math.floor(Math.random() * strobeColors.length)];
+      ctx.fillStyle = pick;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    standaloneRafId = requestAnimationFrame(renderStandaloneAnimation);
+  }
+
+  function startFixer() {
+    if (isStandaloneRunning) return;
+    isStandaloneRunning = true;
+    elapsedSeconds = 0;
+
+    if (canvas) {
+      canvas.width = 320;
+      canvas.height = 180;
+    }
+
+    if (idleOverlay) idleOverlay.classList.add('hidden');
+    if (activeBadge) activeBadge.classList.remove('hidden');
+    if (btnStart) btnStart.classList.add('opacity-40', 'pointer-events-none');
+    if (btnStop) btnStop.disabled = false;
+
+    renderStandaloneAnimation();
+
+    standaloneTimerInterval = setInterval(() => {
+      elapsedSeconds++;
+      const remain = Math.max(0, standaloneDurationSeconds - elapsedSeconds);
+      if (timeElapsed) timeElapsed.textContent = formatTime(elapsedSeconds);
+      if (timeRemaining) timeRemaining.textContent = formatTime(remain);
+
+      if (remain <= 0) {
+        stopFixer();
+        alert('Stuck pixel session completed! Check if your pixel has recovered.');
+      }
+    }, 1000);
+  }
+
+  function stopFixer() {
+    isStandaloneRunning = false;
+    if (standaloneRafId) {
+      cancelAnimationFrame(standaloneRafId);
+      standaloneRafId = null;
+    }
+    if (standaloneTimerInterval) {
+      clearInterval(standaloneTimerInterval);
+      standaloneTimerInterval = null;
+    }
+
+    if (idleOverlay) idleOverlay.classList.remove('hidden');
+    if (activeBadge) activeBadge.classList.add('hidden');
+    if (btnStart) btnStart.classList.remove('opacity-40', 'pointer-events-none');
+    if (btnStop) btnStop.disabled = true;
+  }
+
+  btnStart?.addEventListener('click', startFixer);
+  btnStop?.addEventListener('click', stopFixer);
+
+  timerButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      timerButtons.forEach(b => {
+        b.classList.remove('active', 'bg-surface-elevated', 'text-ink');
+        b.classList.add('bg-surface', 'text-mute');
+      });
+      btn.classList.add('active', 'bg-surface-elevated', 'text-ink');
+      btn.classList.remove('bg-surface', 'text-mute');
+
+      const mins = parseInt(btn.getAttribute('data-minutes') || '10', 10);
+      standaloneDurationSeconds = mins * 60;
+      if (timeRemaining) timeRemaining.textContent = formatTime(standaloneDurationSeconds);
+    });
+  });
+
+  modeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modeButtons.forEach(b => {
+        b.classList.remove('active', 'bg-surface-elevated', 'text-ink');
+        b.classList.add('bg-surface', 'text-mute');
+      });
+      btn.classList.add('active', 'bg-surface-elevated', 'text-ink');
+      btn.classList.remove('bg-surface', 'text-mute');
+      standalonePattern = btn.getAttribute('data-pattern') || 'rgb';
+    });
+  });
+</script>

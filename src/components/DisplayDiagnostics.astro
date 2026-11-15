@@ -1,0 +1,191 @@
+---
+// DisplayDiagnostics.astro - Live Hardware & Screen Specification Inspector
+---
+
+<section id="diagnostics" class="py-16 border-b border-hairline bg-canvas relative">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-blue/10 border border-accent-blue/20 text-xs font-mono text-accent-blue mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-blue"></span>
+        Hardware Inspection
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight text-ink font-sans">
+        Live Display Specifications
+      </h2>
+      <p class="mt-2 text-mute text-sm sm:text-base">
+        Hardware values automatically detected from your browser environment.
+      </p>
+    </div>
+
+    <!-- 6-Grid Diagnostics Card -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      
+      <!-- Native Resolution -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">Screen Resolution</div>
+        <div id="diag-resolution" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
+          Detecting...
+        </div>
+        <div class="text-[11px] text-stone mt-1">Total physical pixel matrix</div>
+      </div>
+
+      <!-- Viewport Resolution -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">CSS Viewport Size</div>
+        <div id="diag-viewport" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
+          Detecting...
+        </div>
+        <div class="text-[11px] text-stone mt-1">Usable browser rendering area</div>
+      </div>
+
+      <!-- Device Pixel Ratio (DPR) -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">Device Pixel Ratio</div>
+        <div id="diag-dpr" class="text-xl sm:text-2xl font-bold font-mono text-accent-yellow mt-2">
+          1.0x
+        </div>
+        <div id="diag-retina-status" class="text-[11px] text-stone mt-1">Standard DPI</div>
+      </div>
+
+      <!-- Refresh Rate Estimator -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">Refresh Rate</div>
+        <div id="diag-fps" class="text-xl sm:text-2xl font-bold font-mono text-accent-green mt-2">
+          Calculating...
+        </div>
+        <div class="text-[11px] text-stone mt-1">Hardware display frequency</div>
+      </div>
+
+      <!-- Color Depth -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">Color Depth</div>
+        <div id="diag-color-depth" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
+          24-bit
+        </div>
+        <div class="text-[11px] text-stone mt-1">16.7 Million Colors (True Color)</div>
+      </div>
+
+      <!-- Wide Color Gamut (DCI-P3) -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">Color Gamut</div>
+        <div id="diag-gamut" class="text-xl sm:text-2xl font-bold font-mono text-accent-blue mt-2">
+          Checking...
+        </div>
+        <div class="text-[11px] text-stone mt-1">DCI-P3 / sRGB color space</div>
+      </div>
+
+      <!-- Dynamic Range (HDR) -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">HDR Dynamic Range</div>
+        <div id="diag-hdr" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
+          Standard (SDR)
+        </div>
+        <div class="text-[11px] text-stone mt-1">High Dynamic Range support</div>
+      </div>
+
+      <!-- Touch Support -->
+      <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
+        <div class="text-xs font-mono text-mute">Touch Capability</div>
+        <div id="diag-touch" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
+          Checking...
+        </div>
+        <div class="text-[11px] text-stone mt-1">Touchscreen hardware detected</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function detectDisplayDiagnostics() {
+    // Resolution
+    const resElem = document.getElementById('diag-resolution');
+    if (resElem) resElem.textContent = `${window.screen.width} × ${window.screen.height}`;
+
+    // Viewport
+    const viewElem = document.getElementById('diag-viewport');
+    if (viewElem) viewElem.textContent = `${window.innerWidth} × ${window.innerHeight}`;
+
+    // DPR & Retina
+    const dpr = window.devicePixelRatio || 1;
+    const dprElem = document.getElementById('diag-dpr');
+    const retinaElem = document.getElementById('diag-retina-status');
+    if (dprElem) dprElem.textContent = `${dpr.toFixed(2)}x`;
+    if (retinaElem) {
+      retinaElem.textContent = dpr >= 2 ? 'High-DPI / Retina Display' : dpr > 1 ? 'Scaled Display' : 'Standard 1x Display';
+    }
+
+    // Color Depth
+    const depthElem = document.getElementById('diag-color-depth');
+    if (depthElem) {
+      depthElem.textContent = `${window.screen.colorDepth}-bit`;
+    }
+
+    // Wide Color Gamut (DCI-P3)
+    const gamutElem = document.getElementById('diag-gamut');
+    if (gamutElem) {
+      if (window.matchMedia && window.matchMedia('(color-gamut: p3)').matches) {
+        gamutElem.textContent = 'DCI-P3 Wide';
+      } else if (window.matchMedia && window.matchMedia('(color-gamut: rec2020)').matches) {
+        gamutElem.textContent = 'Rec.2020';
+      } else {
+        gamutElem.textContent = 'sRGB Standard';
+      }
+    }
+
+    // HDR Check
+    const hdrElem = document.getElementById('diag-hdr');
+    if (hdrElem) {
+      if (window.matchMedia && window.matchMedia('(dynamic-range: high)').matches) {
+        hdrElem.textContent = 'HDR Supported';
+        hdrElem.classList.add('text-accent-green');
+      } else {
+        hdrElem.textContent = 'Standard (SDR)';
+      }
+    }
+
+    // Touch Support
+    const touchElem = document.getElementById('diag-touch');
+    if (touchElem) {
+      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      touchElem.textContent = hasTouch ? 'Touch Enabled' : 'Mouse / Trackpad';
+    }
+  }
+
+  // Live Refresh Rate (FPS) Estimator via requestAnimationFrame
+  function estimateRefreshRate() {
+    const fpsElem = document.getElementById('diag-fps');
+    if (!fpsElem) return;
+
+    let frames = 0;
+    const startTime = performance.now();
+
+    function countFrames(now: number) {
+      frames++;
+      if (now - startTime < 1000) {
+        requestAnimationFrame(countFrames);
+      } else {
+        const estimatedHz = Math.round((frames * 1000) / (now - startTime));
+        // Clamp to standard refresh rates
+        let hzLabel = `${estimatedHz} Hz`;
+        if (estimatedHz >= 57 && estimatedHz <= 63) hzLabel = '60 Hz';
+        else if (estimatedHz >= 72 && estimatedHz <= 78) hzLabel = '75 Hz';
+        else if (estimatedHz >= 115 && estimatedHz <= 125) hzLabel = '120 Hz';
+        else if (estimatedHz >= 140 && estimatedHz <= 150) hzLabel = '144 Hz';
+        else if (estimatedHz >= 160 && estimatedHz <= 170) hzLabel = '165 Hz';
+        else if (estimatedHz >= 235 && estimatedHz <= 245) hzLabel = '240 Hz';
+        else if (estimatedHz >= 350 && estimatedHz <= 370) hzLabel = '360 Hz';
+
+        fpsElem.textContent = hzLabel;
+      }
+    }
+
+    requestAnimationFrame(countFrames);
+  }
+
+  detectDisplayDiagnostics();
+  estimateRefreshRate();
+  window.addEventListener('resize', detectDisplayDiagnostics);
+</script>

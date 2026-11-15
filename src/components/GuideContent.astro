@@ -1,0 +1,454 @@
+---
+// GuideContent.astro - Comprehensive 1000-1500 Word SEO Authority Guide for Pixel Test with 14 Tailored FAQs
+---
+
+<section id="warranty-guide" class="py-16 md:py-24 border-b border-hairline bg-surface/20 transition-colors">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    
+    <!-- 1. INTRODUCTORY OVERVIEW -->
+    <article class="prose prose-invert max-w-none space-y-6">
+      
+      <div class="space-y-3">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-xs font-mono text-accent-blue">
+          <span>Complete Technical Handbook</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          The Comprehensive Guide to Monitor & Screen Pixel Testing
+        </h2>
+        <p class="text-sm sm:text-base text-mute leading-relaxed">
+          Whether you have recently purchased a high-refresh-rate gaming monitor, unboxed a new OLED smartphone, or noticed an irritating speck on your laptop display, performing an accurate <strong class="text-ink">pixel test</strong> is the single most reliable way to confirm the health of your screen panel. Our free web-based <strong class="text-ink">dead pixel tester</strong> provides instant hardware diagnostics directly in your browser without requiring third-party software installation, executables, or intrusive ads.
+        </p>
+      </div>
+
+      <!-- 2. ANATOMY OF A SCREEN PIXEL -->
+      <div class="pt-6 border-t border-hairline space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-ink font-sans">
+          What is a Screen Pixel and How Do Display Subpixels Work?
+        </h3>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          Every modern digital display—including IPS LCD, VA, OLED, AMOLED, and Mini-LED panels—relies on an intricate grid of microscopic picture elements known as a <strong class="text-ink">screen pixel</strong>. A typical 1080p display contains over 2 million individual pixels (<span class="font-mono text-ink">1920 × 1080 = 2,073,600 pixels</span>), while a 4K UHD monitor houses a staggering 8.3 million pixels (<span class="font-mono text-ink">3840 × 2160 = 8,294,400 pixels</span>).
+        </p>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          Each individual <strong class="text-ink">screen pixel</strong> is composed of three primary electronic subpixels:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4">
+          <div class="raycast-card p-4 bg-surface">
+            <div class="flex items-center gap-2 mb-2 font-mono text-xs font-semibold text-accent-red">
+              <span class="w-2.5 h-2.5 rounded-full bg-accent-red"></span> Red Subpixel
+            </div>
+            <p class="text-xs text-mute">Modulates long-wavelength visible light through dedicated color filters or organic diodes.</p>
+          </div>
+          <div class="raycast-card p-4 bg-surface">
+            <div class="flex items-center gap-2 mb-2 font-mono text-xs font-semibold text-accent-green">
+              <span class="w-2.5 h-2.5 rounded-full bg-accent-green"></span> Green Subpixel
+            </div>
+            <p class="text-xs text-mute">Stimulates the human eye's peak luminous sensitivity curve, responsible for perceived luminance.</p>
+          </div>
+          <div class="raycast-card p-4 bg-surface">
+            <div class="flex items-center gap-2 mb-2 font-mono text-xs font-semibold text-accent-blue">
+              <span class="w-2.5 h-2.5 rounded-full bg-accent-blue"></span> Blue Subpixel
+            </div>
+            <p class="text-xs text-mute">Emits short-wavelength light to complete the additive RGB spectrum needed for full-gamut rendering.</p>
+          </div>
+        </div>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          By varying the electrical voltage supplied to each microscopic Thin-Film Transistor (TFT), your monitor controls how much light passes through the liquid crystal matrix. When millions of subpixels switch rapidly in unison, your eyes perceive seamless colors, gradients, and video. However, during semiconductor fabrication or physical transit, micro-transistors can malfunction—resulting in flaws that only a systematic <strong class="text-ink">screen pixel test</strong> can uncover.
+        </p>
+      </div>
+
+      <!-- 3. DEFECT CLASSIFICATIONS (Dead vs. Stuck vs. Hot) -->
+      <div class="pt-6 border-t border-hairline space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-ink font-sans">
+          Dead Pixel Test vs. Stuck Pixel Test: Understanding Display Defects
+        </h3>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          Display defects fall into three primary categories: dead pixels, stuck subpixels, and hot pixels. Correctly diagnosing which issue affects your monitor determines whether the flaw can be fixed via software agitation or requires an RMA replacement:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+          <!-- Dead Pixel -->
+          <div class="raycast-card p-5 bg-surface flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded bg-black border border-hairline flex items-center justify-center text-xs font-mono font-bold text-white mb-3">
+                00
+              </div>
+              <h4 class="text-base font-semibold text-ink font-sans">Dead Pixel</h4>
+              <span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-mono uppercase bg-surface-elevated text-mute my-2">
+                Unpowered Transistor
+              </span>
+              <p class="text-xs text-mute leading-relaxed">
+                In a <strong class="text-ink">dead pixel test</strong>, a dead pixel appears as an inert, permanently dark black dot. Because the transistor matrix delivers zero power to all three sub-channels, the pixel cannot illuminate. Dead pixels are most obvious when viewed against a solid white or bright background.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-hairline text-[11px] font-mono text-accent-red">
+              Permanent Hardware Defect
+            </div>
+          </div>
+
+          <!-- Stuck Pixel -->
+          <div class="raycast-card p-5 bg-surface flex flex-col justify-between border-accent-green/30">
+            <div>
+              <div class="w-8 h-8 rounded bg-accent-red border border-accent-red/40 flex items-center justify-center text-xs font-mono font-bold text-white mb-3 shadow-xs">
+                RGB
+              </div>
+              <h4 class="text-base font-semibold text-ink font-sans">Stuck Pixel</h4>
+              <span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-mono uppercase bg-accent-green/10 text-accent-green my-2">
+                Frozen Sub-Transistor
+              </span>
+              <p class="text-xs text-mute leading-relaxed">
+                During a <strong class="text-ink">stuck pixel test</strong>, you will spot a stubborn colored speck locked in an active state—typically shining pure red, green, blue, or cyan. The liquid crystal has physically seized in an open position. Unlike dead pixels, stuck subpixels can often be revived via our 60FPS noise flasher.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-hairline text-[11px] font-mono text-accent-green">
+              Often Recoverable via Tool
+            </div>
+          </div>
+
+          <!-- Hot Pixel -->
+          <div class="raycast-card p-5 bg-surface flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded bg-white border border-hairline flex items-center justify-center text-xs font-mono font-bold text-black mb-3">
+                FF
+              </div>
+              <h4 class="text-base font-semibold text-ink font-sans">Hot Pixel</h4>
+              <span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-mono uppercase bg-surface-elevated text-mute my-2">
+                All Subpixels Stuck On
+              </span>
+              <p class="text-xs text-mute leading-relaxed">
+                A hot pixel occurs when all three RGB subpixels remain permanently energized at full voltage simultaneously. This creates a bright white dot that remains intensely visible when running a <strong class="text-ink">screen dead pixel test</strong> on a pitch-black background.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-hairline text-[11px] font-mono text-accent-yellow">
+              Variable Fixability Rate
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. SCREEN PIXEL SIZE & PHONE SCREEN PIXEL SIZE EXPLAINED -->
+      <div class="pt-6 border-t border-hairline space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-ink font-sans">
+          Screen Pixel Size vs. Phone Screen Pixel Size: Pixel Pitch & Density
+        </h3>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          When conducting a <strong class="text-ink">monitor dead pixel test</strong> or inspecting a smartphone display, the physical visibility of a defect depends directly on the <strong class="text-ink">screen pixel size</strong> (technically called <em>pixel pitch</em>) and pixel density (Pixels Per Inch, or PPI). Pixel pitch measures the physical distance from the center of one pixel to the center of the adjacent pixel, commonly expressed in millimeters (mm) or micrometers (&mu;m).
+        </p>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          Because smartphone screens are viewed from just 10 to 12 inches away, <strong class="text-ink">phone screen pixel size</strong> is microscopic compared to desktop computer monitors:
+        </p>
+
+        <!-- Technical Comparison Table: Pixel Sizes -->
+        <div class="raycast-card overflow-hidden my-4">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-sans">
+              <thead class="bg-surface-elevated border-b border-hairline text-mute font-mono uppercase tracking-wider text-[10px]">
+                <tr>
+                  <th class="py-3 px-4">Device Class / Screen</th>
+                  <th class="py-3 px-4">Resolution</th>
+                  <th class="py-3 px-4">Density (PPI)</th>
+                  <th class="py-3 px-4">Physical Pixel Size (Pitch)</th>
+                  <th class="py-3 px-4">Defect Noticeability</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-charcoal">
+                <tr class="hover:bg-surface-elevated/40 transition-colors">
+                  <td class="py-3 px-4 font-medium text-ink">Modern Smartphone (OLED)</td>
+                  <td class="py-3 px-4 font-mono">2556 × 1179 (6.1")</td>
+                  <td class="py-3 px-4 font-mono text-accent-green">~460 PPI</td>
+                  <td class="py-3 px-4 font-mono">~0.055 mm (55 microns)</td>
+                  <td class="py-3 px-4 text-mute">Requires close squinting</td>
+                </tr>
+                <tr class="hover:bg-surface-elevated/40 transition-colors">
+                  <td class="py-3 px-4 font-medium text-ink">High-End Phone (1440p)</td>
+                  <td class="py-3 px-4 font-mono">3120 × 1440 (6.8")</td>
+                  <td class="py-3 px-4 font-mono text-accent-green">~505 PPI</td>
+                  <td class="py-3 px-4 font-mono">~0.050 mm (50 microns)</td>
+                  <td class="py-3 px-4 text-mute">Virtually invisible to naked eye</td>
+                </tr>
+                <tr class="hover:bg-surface-elevated/40 transition-colors">
+                  <td class="py-3 px-4 font-medium text-ink">Retina Laptop (14" MacBook)</td>
+                  <td class="py-3 px-4 font-mono">3024 × 1964 (14.2")</td>
+                  <td class="py-3 px-4 font-mono text-accent-blue">254 PPI</td>
+                  <td class="py-3 px-4 font-mono">~0.100 mm (100 microns)</td>
+                  <td class="py-3 px-4 text-mute">Noticeable on clean white tabs</td>
+                </tr>
+                <tr class="hover:bg-surface-elevated/40 transition-colors">
+                  <td class="py-3 px-4 font-medium text-ink">27" 4K Gaming Monitor</td>
+                  <td class="py-3 px-4 font-mono">3840 × 2160 (27.0")</td>
+                  <td class="py-3 px-4 font-mono text-accent-blue">163 PPI</td>
+                  <td class="py-3 px-4 font-mono">~0.155 mm (155 microns)</td>
+                  <td class="py-3 px-4 text-ink font-medium">Visible upon inspection</td>
+                </tr>
+                <tr class="hover:bg-surface-elevated/40 transition-colors">
+                  <td class="py-3 px-4 font-medium text-ink">27" 1440p QHD Monitor</td>
+                  <td class="py-3 px-4 font-mono">2560 × 1440 (27.0")</td>
+                  <td class="py-3 px-4 font-mono text-accent-yellow">108 PPI</td>
+                  <td class="py-3 px-4 font-mono">~0.233 mm (233 microns)</td>
+                  <td class="py-3 px-4 text-accent-yellow font-medium">Instantly spotted</td>
+                </tr>
+                <tr class="hover:bg-surface-elevated/40 transition-colors">
+                  <td class="py-3 px-4 font-medium text-ink">24" 1080p Budget Monitor</td>
+                  <td class="py-3 px-4 font-mono">1920 × 1080 (24.0")</td>
+                  <td class="py-3 px-4 font-mono text-stone">92 PPI</td>
+                  <td class="py-3 px-4 font-mono">~0.274 mm (274 microns)</td>
+                  <td class="py-3 px-4 text-accent-red font-medium">Glaringly obvious defect</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          As seen in the data above, on a 24-inch 1080p monitor, a dead pixel is almost <strong>5 times larger</strong> in surface area than a dead pixel on a smartphone. This explains why running a <strong class="text-ink">monitor pixel test</strong> immediately after delivery is essential—desktop display defects cannot hide behind high pixel density.
+        </p>
+      </div>
+
+      <!-- 5. HOW TO RUN A COMPREHENSIVE SCREEN DEAD PIXEL CHECK -->
+      <div class="pt-6 border-t border-hairline space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-ink font-sans">
+          Step-by-Step: How to Perform a Thorough Screen Dead Pixel Test
+        </h3>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          To ensure 100% diagnostic accuracy when using our online <strong class="text-ink">dead pixel check</strong> tool, follow this verified hardware testing workflow:
+        </p>
+
+        <div class="space-y-3 my-4">
+          <div class="raycast-card p-4 bg-surface flex items-start gap-3">
+            <span class="raycast-kbd shrink-0 mt-0.5">Step 1</span>
+            <div>
+              <h5 class="text-sm font-semibold text-ink">Clean the Display Glass</h5>
+              <p class="text-xs text-mute mt-1">Lightly mist a clean microfiber cloth with distilled water or screen-safe cleaner and wipe your display in circular motions. Microscopic dust motes and dried water droplets frequently mimic dead pixels.</p>
+            </div>
+          </div>
+
+          <div class="raycast-card p-4 bg-surface flex items-start gap-3">
+            <span class="raycast-kbd shrink-0 mt-0.5">Step 2</span>
+            <div>
+              <h5 class="text-sm font-semibold text-ink">Enter Native Fullscreen Mode</h5>
+              <p class="text-xs text-mute mt-1">Click the <strong class="text-ink">Launch Fullscreen Test</strong> button or tap <span class="raycast-kbd text-[10px]">F</span> on your keyboard. Ensure browser address bars, bookmarks, and OS taskbars disappear completely.</p>
+            </div>
+          </div>
+
+          <div class="raycast-card p-4 bg-surface flex items-start gap-3">
+            <span class="raycast-kbd shrink-0 mt-0.5">Step 3</span>
+            <div>
+              <h5 class="text-sm font-semibold text-ink">Inspect Solid White Screen First</h5>
+              <p class="text-xs text-mute mt-1">Scan the pure white canvas grid by grid. Look closely for tiny dark, gray, or black specks. A dead pixel will be unable to transmit light and will show up as a dark dot.</p>
+            </div>
+          </div>
+
+          <div class="raycast-card p-4 bg-surface flex items-start gap-3">
+            <span class="raycast-kbd shrink-0 mt-0.5">Step 4</span>
+            <div>
+              <h5 class="text-sm font-semibold text-ink">Switch to Pure Black Background</h5>
+              <p class="text-xs text-mute mt-1">Press <span class="raycast-kbd text-[10px]">Space</span> to navigate to the solid black screen. In a dimly lit room, inspect for stuck bright pixels (red, green, blue) as well as yellowish light leaking along the frame bezels (backlight bleed).</p>
+            </div>
+          </div>
+
+          <div class="raycast-card p-4 bg-surface flex items-start gap-3">
+            <span class="raycast-kbd shrink-0 mt-0.5">Step 5</span>
+            <div>
+              <h5 class="text-sm font-semibold text-ink">Cycle Primary Red, Green, and Blue Spectrum</h5>
+              <p class="text-xs text-mute mt-1">Step through the individual primary colors. On a pure Red screen, any dark spot indicates a damaged Red subpixel. Repeat on Green and Blue screens to verify subpixel health across your entire panel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. MONITOR WARRANTY RETURN POLICIES -->
+      <div class="pt-6 border-t border-hairline space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-ink font-sans">
+          Manufacturer Warranty Standards & ISO 13406-2 Guidelines
+        </h3>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          Many consumers are surprised to learn that finding a single dead pixel does not automatically qualify a monitor for a free warranty replacement. The International Organization for Standardization established the <strong>ISO 13406-2</strong> (superseded by <strong>ISO 9241-307</strong>) benchmark, which defines acceptable pixel defect thresholds per million pixels:
+        </p>
+
+        <ul class="list-disc pl-5 text-xs sm:text-sm text-body space-y-2 my-3">
+          <li><strong>Class 0 (Zero Tolerance):</strong> Guaranteed 0 dead pixels and 0 stuck subpixels. Reserved for medical imaging and ultra-high-end studio reference displays.</li>
+          <li><strong>Class I (Near Zero):</strong> Allows maximum 1 dead pixel or 1 stuck pixel per panel.</li>
+          <li><strong>Class II (Standard Consumer Monitors):</strong> The default tier covering 95% of consumer and gaming monitors. Permits up to <strong>2 permanently bright pixels, 5 permanently dark pixels, or up to 50 defective subpixels</strong> per million pixels before an RMA replacement is mandated.</li>
+        </ul>
+
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          However, leading hardware manufacturers offer proprietary warranty upgrades. For instance, Dell provides its <em>Premium Panel Guarantee</em> across the UltraSharp and Alienware series, promising free replacements if even a single bright subpixel is detected within the warranty window. Similarly, ASUS offers its <em>Zero Bright Dot (ZBD)</em> policy for select ROG and ProArt displays.
+        </p>
+      </div>
+
+    </article>
+
+    <!-- 7. FREQUENTLY ASKED QUESTIONS (14 Dedicated SEO Queries) -->
+    <div id="faq" class="pt-10 border-t border-hairline">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-red/10 border border-accent-red/20 text-xs font-mono text-accent-red mb-3">
+          <span>Frequently Asked Questions</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          Display Diagnostics FAQ
+        </h2>
+        <p class="mt-2 text-mute text-xs sm:text-sm">
+          Detailed technical answers to common questions about dead pixel testing, phone screens, monitor warranties, and repair methods.
+        </p>
+      </div>
+
+      <div class="space-y-3 max-w-3xl mx-auto">
+        
+        <!-- Q1 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>How do you test for dead pixels?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            To test for dead pixels, wipe your screen with a clean microfiber cloth and open an online pixel test in native full-screen mode. Cycle through solid contrasting backgrounds—specifically pure white, pure black, red, green, and blue. Closely scan the display for tiny specks that fail to match the background color, such as dark spots on a white screen (dead pixels) or bright colored specks on a black screen (stuck pixels).
+          </p>
+        </details>
+
+        <!-- Q2 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Can I fix a dead pixel?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            A genuinely dead pixel is caused by a permanently defective or unpowered micro-transistor and generally cannot be repaired via software. However, if the subpixel is merely "stuck" (frozen in a solid red, green, or blue state), you can often revive it using an online high-speed pixel flasher or through gentle targeted pressure with a damp microfiber cloth. If a dead pixel persists on a newly purchased device, check the manufacturer's warranty for an RMA replacement.
+          </p>
+        </details>
+
+        <!-- Q3 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Is a dead pixel a big deal?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            In most cases, an isolated dead pixel is a minor cosmetic defect rather than a critical system failure. On high-resolution smartphone screens (400+ PPI), a single dead pixel is microscopic and virtually invisible from standard distances. However, on larger desktop monitors or for professional photo/video editors, dead pixels—especially near the center of the display—can be distracting and may reduce the device's resale value.
+          </p>
+        </details>
+
+        <!-- Q4 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>How to test dead pixel on Android?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            You can test for dead pixels on Android by opening a web-based pixel tester in Chrome, tapping 'Launch Fullscreen Test', and swiping across solid colors (black, white, red, green, blue). On Samsung Galaxy devices, you can also open the phone dialer and enter the diagnostic secret code <code class="font-mono text-ink bg-surface-elevated px-1 py-0.5 rounded text-xs">*#0*#</code> to launch the hardware test menu directly.
+          </p>
+        </details>
+
+        <!-- Q5 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Can dead pixels disappear?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            True dead pixels with severed electrical connections rarely disappear on their own. However, stuck pixels or pixels with temporary contact resistance fluctuations caused by temperature changes, thermal expansion, or mechanical flexing can occasionally dislodge or resume normal operation spontaneously over time.
+          </p>
+        </details>
+
+        <!-- Q6 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Can I repair dead pixels online?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            Online tools cannot physically resolder a broken internal transistor. However, online pixel fixers can successfully repair stuck pixels. These tools rapidly flip subpixels between active and inactive states 60 times per second, generating thousands of electrical cycles per minute to agitate and release frozen liquid crystal molecules without requiring downloads.
+          </p>
+        </details>
+
+        <!-- Q7 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Are dead pixels harmful?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            No, dead pixels are completely harmless to your device's hardware, operating system, and personal safety. They do not emit radiation, do not consume excess battery power, and do not pose a danger to the rest of the display panel.
+          </p>
+        </details>
+
+        <!-- Q8 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Are dead pixels permanent?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            Yes, genuine dead pixels (transistor channels that receive zero power and remain permanently black) are typically permanent hardware faults requiring panel replacement. In contrast, stuck pixels (glowing red, green, or blue subpixels) are often temporary and can be revived with software stimulation tools.
+          </p>
+        </details>
+
+        <!-- Q9 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Can dead pixels spread?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            Dead pixels do not spread electronically because each pixel operates on its own dedicated Thin-Film Transistor (TFT). However, if dead pixels were caused by blunt impact shock, frame flex, or liquid crystal fluid leakage, that physical fracture can widen over time, causing adjacent pixels to fail.
+          </p>
+        </details>
+
+        <!-- Q10 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Can you ignore a dead pixel?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            Yes, you can safely ignore a dead pixel if it does not interfere with your daily viewing. It will not cause surrounding pixels to deteriorate or damage monitor hardware. Many users only spot dead pixels when viewing full-screen solid white pages.
+          </p>
+        </details>
+
+        <!-- Q11 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>How do phones get dead pixels?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            Smartphones develop dead pixels through silicon manufacturing imperfections, drop impacts that crack the internal AMOLED/OLED substrate, tight pocket compression, moisture intrusion, or excessive internal heat that degrades subpixel electrical traces over time.
+          </p>
+        </details>
+
+        <!-- Q12 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>Can dead pixels get worse?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            Isolated factory dead pixels generally remain unchanged throughout the life of the display. However, if the dead pixel originated from drops, physical bending, or trauma, daily mechanical handling and thermal expansion can cause the microscopic internal fracture to propagate, causing neighbor pixels to fail.
+          </p>
+        </details>
+
+        <!-- Q13 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>How to detect dead pixels?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            The most reliable method to detect dead pixels is to use an online full-screen pixel tester in a dark or dimly lit room. Wipe off surface dust with a microfiber cloth, launch a pure solid white background to reveal dark dead pixels, and switch to a solid black background to expose bright stuck or hot subpixels.
+          </p>
+        </details>
+
+        <!-- Q14 -->
+        <details class="raycast-card p-4 sm:p-5 group cursor-pointer">
+          <summary class="text-xs sm:text-sm font-medium text-ink flex items-center justify-between list-none">
+            <span>What do dead pixels look like on a phone?</span>
+            <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
+            On a phone screen, a dead pixel appears as an inert, microscopic black speck or tiny square that never illuminates, regardless of what app or image is displayed. On dense smartphone screens (400–500 PPI), a single dead pixel is roughly 50 microns wide (about the thickness of a human hair) and is most noticeable on solid white backgrounds like document readers or bright web pages.
+          </p>
+        </details>
+
+      </div>
+    </div>
+
+  </div>
+</section>
