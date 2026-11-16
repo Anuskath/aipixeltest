@@ -129,12 +129,37 @@ import Footer from '../components/Footer.astro';
                 id="contact-submit-btn"
                 class="raycast-pill-btn w-full !py-2.5 text-xs font-semibold cursor-pointer active:scale-[0.99]"
               >
-                Send Message
+                Send via Email App ✉️
               </button>
 
-              <!-- Success Alert Message -->
-              <div id="contact-success" class="hidden p-3 rounded-lg bg-accent-green/10 border border-accent-green/20 text-xs text-accent-green text-center">
-                ✓ Thank you! Your message has been sent. We'll be in touch shortly.
+              <!-- Delivery Status & Fallback Info -->
+              <div id="contact-status" class="hidden p-3.5 rounded-lg bg-surface-elevated border border-hairline text-xs space-y-2.5">
+                <div class="flex items-center gap-2 text-accent-green font-medium">
+                  <span>✓</span>
+                  <span>Opening your email client to send message...</span>
+                </div>
+                <p class="text-mute text-[11px] leading-relaxed">
+                  If your browser or device did not open an email app automatically, you can copy your message or email us directly at <span class="font-mono text-ink">support@aipixeltest.com</span>.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1">
+                  <button 
+                    type="button" 
+                    id="btn-copy-email"
+                    class="px-2.5 py-1 rounded bg-surface border border-hairline text-[11px] font-mono text-ink hover:border-hairline-strong cursor-pointer"
+                  >
+                    📋 Copy support@aipixeltest.com
+                  </button>
+                  <button 
+                    type="button" 
+                    id="btn-copy-body"
+                    class="px-2.5 py-1 rounded bg-surface border border-hairline text-[11px] font-mono text-ink hover:border-hairline-strong cursor-pointer"
+                  >
+                    📋 Copy Full Message
+                  </button>
+                </div>
+                <div id="copy-toast" class="hidden text-[10px] text-accent-green font-mono">
+                  Copied to clipboard!
+                </div>
               </div>
 
             </form>
@@ -152,27 +177,52 @@ import Footer from '../components/Footer.astro';
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
-  const successBox = document.getElementById('contact-success');
+  const statusBox = document.getElementById('contact-status');
   const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement;
+  const btnCopyEmail = document.getElementById('btn-copy-email');
+  const btnCopyBody = document.getElementById('btn-copy-body');
+  const copyToast = document.getElementById('copy-toast');
+
+  let lastCompiledMessage = '';
+
+  function showToast(text: string) {
+    if (!copyToast) return;
+    copyToast.textContent = text;
+    copyToast.classList.remove('hidden');
+    setTimeout(() => copyToast.classList.add('hidden'), 2500);
+  }
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-    }
 
-    // Simulate clean dispatch
-    setTimeout(() => {
-      form.reset();
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
-      }
-      if (successBox) {
-        successBox.classList.remove('hidden');
-        setTimeout(() => successBox.classList.add('hidden'), 5000);
-      }
-    }, 700);
+    const name = (document.getElementById('contact-name') as HTMLInputElement)?.value || '';
+    const email = (document.getElementById('contact-email') as HTMLInputElement)?.value || '';
+    const topic = (document.getElementById('contact-topic') as HTMLSelectElement)?.value || 'General';
+    const message = (document.getElementById('contact-message') as HTMLTextAreaElement)?.value || '';
+
+    const subject = `[PixelTest AI] ${topic.toUpperCase()} - Inquiry from ${name}`;
+    const body = `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}\n\n---\nSent via aipixeltest.com`;
+    lastCompiledMessage = body;
+
+    const mailtoUrl = `mailto:support@aipixeltest.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    if (statusBox) statusBox.classList.remove('hidden');
+
+    // Trigger user's mail client
+    window.location.href = mailtoUrl;
+  });
+
+  btnCopyEmail?.addEventListener('click', () => {
+    navigator.clipboard.writeText('support@aipixeltest.com').then(() => {
+      showToast('Email address copied to clipboard!');
+    });
+  });
+
+  btnCopyBody?.addEventListener('click', () => {
+    if (lastCompiledMessage) {
+      navigator.clipboard.writeText(lastCompiledMessage).then(() => {
+        showToast('Full message copied to clipboard!');
+      });
+    }
   });
 </script>

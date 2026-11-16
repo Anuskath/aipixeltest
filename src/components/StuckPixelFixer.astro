@@ -5,7 +5,7 @@
 <section id="fixer" class="py-16 md:py-24 border-b border-hairline bg-surface/30 relative">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
       <div>
         <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-green/10 border border-accent-green/20 text-xs font-mono text-accent-green mb-3">
           <span class="w-1.5 h-1.5 rounded-full bg-accent-green"></span>
@@ -15,20 +15,31 @@
           Stuck Pixel Reviver
         </h2>
         <p class="mt-1.5 text-mute text-xs sm:text-sm max-w-xl">
-          Liquid crystal sub-pixels occasionally lock in an "on" state. Rapid 60Hz color cycling stimulates the transistor matrix to release frozen crystals.
+          Uses native <code class="text-ink font-mono text-[11px] bg-surface-elevated px-1 py-0.5 rounded">requestAnimationFrame</code> cycles to alternate subpixel transistor voltages at your monitor's refresh rate. Designed to stimulate seized liquid crystals without physical contact.
         </p>
       </div>
 
-      <!-- Success rate pill -->
+      <!-- Scope & Safety Badge (Evidence-based, zero unverified percentages) -->
       <div class="p-3 rounded-lg bg-surface border border-hairline flex items-center gap-3 shrink-0">
-        <div class="text-2xl font-bold font-mono text-accent-green">~60%</div>
+        <div class="w-9 h-9 rounded-lg bg-surface-elevated border border-hairline flex items-center justify-center text-accent-green font-mono text-xs font-bold">
+          rAF
+        </div>
         <div class="text-xs text-mute leading-tight">
-          Recovery rate<br /><span class="text-charcoal font-sans">for stuck subpixels</span>
+          Hardware-safe cycle<br /><span class="text-ink font-sans font-medium">For stuck subpixels only</span>
         </div>
       </div>
     </div>
 
+    <!-- Clear Scope Notification: Dead vs Stuck -->
+    <div class="mb-6 p-3.5 rounded-lg bg-surface border border-hairline flex items-start gap-3 text-xs text-mute">
+      <span class="text-accent-yellow text-sm shrink-0 mt-0.5">ℹ️</span>
+      <div class="leading-relaxed">
+        <strong class="text-ink font-medium">Important Technical Distinction:</strong> This tool only attempts to revive <strong class="text-ink">stuck subpixels</strong> (pixels frozen on red, green, or blue). A genuinely <strong class="text-ink">dead pixel</strong> (an unpowered, permanently dark transistor) is a permanent hardware defect and <span class="text-accent-red font-medium">cannot be repaired by software or flashing</span>. Never apply physical force or pressure to your screen.
+      </div>
+    </div>
+
     <!-- Interactive Fixer Widget Card -->
+    <!-- AD-EXCLUSION-ZONE: Per AdSense & UX guidelines, no ad units should ever be placed within this stimulation control area -->
     <div class="raycast-card p-5 md:p-7 bg-surface relative overflow-hidden">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -44,16 +55,16 @@
               <div class="w-10 h-10 rounded-lg bg-surface-elevated border border-hairline flex items-center justify-center text-accent-green text-lg">
                 ⚡
               </div>
-              <div class="text-sm font-semibold text-ink">Pixel Fixer Ready</div>
+              <div class="text-sm font-semibold text-ink">Pixel Fixer Ready (Off by Default)</div>
               <div class="text-xs text-mute max-w-xs">
-                Select duration and click Start. Place this box directly over your stuck subpixel.
+                Select your preferred duration and click Start. Drag or place this window directly over the affected subpixel.
               </div>
             </div>
 
             <!-- Active Running Indicator Badge -->
             <div id="fixer-active-badge" class="absolute top-2.5 right-2.5 hidden px-2 py-0.5 rounded bg-black/80 border border-accent-green/40 text-[10px] font-mono text-accent-green flex items-center gap-1.5 backdrop-blur">
               <span class="w-1.5 h-1.5 rounded-full bg-accent-green animate-ping"></span>
-              <span>RUNNING (60 FPS)</span>
+              <span id="fixer-fps-text">CYCLING (Native rAF)</span>
             </div>
           </div>
 
@@ -78,10 +89,10 @@
                 10 Mins <span class="block text-[10px] text-mute">Standard</span>
               </button>
               <button class="fixer-timer-btn py-1.5 px-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="30">
-                30 Mins <span class="block text-[10px] text-mute">Deep Fix</span>
+                30 Mins <span class="block text-[10px] text-mute">Extended</span>
               </button>
               <button class="fixer-timer-btn py-1.5 px-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="60">
-                60 Mins <span class="block text-[10px] text-mute">Stubborn</span>
+                60 Mins <span class="block text-[10px] text-mute">Maximum</span>
               </button>
             </div>
           </div>
@@ -117,18 +128,65 @@
               class="px-4 py-2 rounded-full bg-surface-elevated hover:bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer disabled:opacity-40"
               disabled
             >
-              Stop
+              Stop <span class="text-[10px] opacity-70">(Esc)</span>
             </button>
           </div>
 
-          <div class="text-[11px] text-mute leading-relaxed">
-            ⚠️ <strong>Notice:</strong> Rapid flashing pattern. Look away if you have photosensitive sensitivities or light-triggered migraines.
+          <!-- Prominent Safety Notice Box -->
+          <div class="p-3 rounded-lg bg-surface-elevated border border-hairline text-[11px] text-mute leading-relaxed space-y-1">
+            <div class="flex items-center gap-1.5 text-accent-yellow font-medium text-xs">
+              <span>⚠️</span> Photosensitivity Safety Reminder
+            </div>
+            <p>
+              This tool displays rapid color flashing. Look away from the screen while running. Do not use if you have light-triggered migraines or photosensitive epilepsy. Press <span class="font-mono text-ink bg-surface px-1 py-0.5 rounded border border-hairline text-[10px]">Esc</span> at any time to instantly stop.
+            </p>
           </div>
 
         </div>
 
       </div>
 
+    </div>
+
+    <!-- Photosensitivity Safety Confirmation Modal (shown prior to 1st activation) -->
+    <div id="fixer-safety-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+      <div class="raycast-card max-w-md w-full p-6 bg-surface border border-accent-yellow/30 shadow-2xl space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-accent-yellow/10 border border-accent-yellow/20 flex items-center justify-center text-accent-yellow text-lg">
+            ⚠️
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-ink">Photosensitivity Warning</h3>
+            <p class="text-xs text-mute">Please confirm before activating rapid flashing</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-body leading-relaxed space-y-2 border-y border-hairline py-3">
+          <p>
+            The Stuck Pixel Reviver flashes RGB subpixels at high frequency (synchronized with your monitor's refresh rate, up to 144Hz+) to stimulate liquid crystals.
+          </p>
+          <ul class="list-disc pl-4 space-y-1 text-mute">
+            <li><strong>Do not use</strong> if you or anyone in the room has photosensitive epilepsy or light sensitivities.</li>
+            <li>Look away or minimize the window focus once aligned over the stuck pixel.</li>
+            <li>You can press <strong class="text-ink">ESC</strong> or click <strong class="text-ink">Stop</strong> at any time to halt immediately.</li>
+          </ul>
+        </div>
+
+        <div class="flex items-center justify-end gap-2.5 pt-2">
+          <button 
+            id="btn-safety-cancel"
+            class="px-4 py-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button 
+            id="btn-safety-confirm"
+            class="px-4 py-2 rounded-lg bg-accent-green hover:bg-emerald-400 text-black text-xs font-semibold cursor-pointer shadow-xs"
+          >
+            I Understand, Start Fixer
+          </button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -141,6 +199,7 @@
   let elapsedSeconds = 0;
   let standalonePattern = 'rgb';
   let standaloneRafId: any = null;
+  let safetyConfirmed = false;
 
   const canvas = document.getElementById('standalone-noise-canvas') as HTMLCanvasElement;
   const idleOverlay = document.getElementById('fixer-idle-overlay');
@@ -151,6 +210,10 @@
   const timeRemaining = document.getElementById('time-remaining');
   const timerButtons = document.querySelectorAll('.fixer-timer-btn');
   const modeButtons = document.querySelectorAll('.fixer-mode-btn');
+
+  const safetyModal = document.getElementById('fixer-safety-modal');
+  const btnSafetyConfirm = document.getElementById('btn-safety-confirm');
+  const btnSafetyCancel = document.getElementById('btn-safety-cancel');
 
   function formatTime(secs: number) {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -186,7 +249,7 @@
     standaloneRafId = requestAnimationFrame(renderStandaloneAnimation);
   }
 
-  function startFixer() {
+  function actuallyStartFixer() {
     if (isStandaloneRunning) return;
     isStandaloneRunning = true;
     elapsedSeconds = 0;
@@ -211,9 +274,17 @@
 
       if (remain <= 0) {
         stopFixer();
-        alert('Stuck pixel session completed! Check if your pixel has recovered.');
+        alert('Stuck pixel session completed! Please inspect the display to check if the subpixel has freed.');
       }
     }, 1000);
+  }
+
+  function requestStartFixer() {
+    if (safetyConfirmed) {
+      actuallyStartFixer();
+    } else {
+      safetyModal?.classList.remove('hidden');
+    }
   }
 
   function stopFixer() {
@@ -233,8 +304,29 @@
     if (btnStop) btnStop.disabled = true;
   }
 
-  btnStart?.addEventListener('click', startFixer);
+  btnSafetyConfirm?.addEventListener('click', () => {
+    safetyConfirmed = true;
+    safetyModal?.classList.add('hidden');
+    actuallyStartFixer();
+  });
+
+  btnSafetyCancel?.addEventListener('click', () => {
+    safetyModal?.classList.add('hidden');
+  });
+
+  btnStart?.addEventListener('click', requestStartFixer);
   btnStop?.addEventListener('click', stopFixer);
+
+  // Global ESC key listener to instantly stop flashing safely
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (!safetyModal?.classList.contains('hidden')) {
+        safetyModal.classList.add('hidden');
+      } else if (isStandaloneRunning) {
+        stopFixer();
+      }
+    }
+  });
 
   timerButtons.forEach(btn => {
     btn.addEventListener('click', () => {

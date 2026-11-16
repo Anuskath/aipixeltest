@@ -96,11 +96,11 @@
                 Frozen Sub-Transistor
               </span>
               <p class="text-xs text-mute leading-relaxed">
-                During a <strong class="text-ink">stuck pixel test</strong>, you will spot a stubborn colored speck locked in an active state—typically shining pure red, green, blue, or cyan. The liquid crystal has physically seized in an open position. Unlike dead pixels, stuck subpixels can often be revived via our 60FPS noise flasher.
+                During a <strong class="text-ink">stuck pixel test</strong>, you will spot a stubborn colored speck locked in an active state—typically shining pure red, green, blue, or cyan. The liquid crystal has physically seized in an open position. Unlike permanently dead pixels (which software cannot repair), stuck subpixels can sometimes be dislodged via rapid subpixel color cycling.
               </p>
             </div>
             <div class="mt-4 pt-3 border-t border-hairline text-[11px] font-mono text-accent-green">
-              Often Recoverable via Tool
+              Potentially Recoverable via Software
             </div>
           </div>
 
@@ -271,7 +271,7 @@
         </ul>
 
         <p class="text-xs sm:text-sm text-body leading-relaxed">
-          However, leading hardware manufacturers offer proprietary warranty upgrades. For instance, Dell provides its <em>Premium Panel Guarantee</em> across the UltraSharp and Alienware series, promising free replacements if even a single bright subpixel is detected within the warranty window. Similarly, ASUS offers its <em>Zero Bright Dot (ZBD)</em> policy for select ROG and ProArt displays.
+          Leading hardware manufacturers often implement proprietary warranty enhancements. For instance, Dell offers its <em>Premium Panel Guarantee</em> on select UltraSharp and Alienware displays (promising zero bright subpixels during the limited hardware warranty), while ASUS features a <em>Zero Bright Dot (ZBD)</em> policy for select ROG and ProArt panels. <strong>Note:</strong> Warranty terms vary significantly by manufacturer, region, product series, and purchase date. Always verify the exact pixel policy in your official product documentation before initiating an RMA return claim.
         </p>
       </div>
 
@@ -311,7 +311,7 @@
             <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
           </summary>
           <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
-            A genuinely dead pixel is caused by a permanently defective or unpowered micro-transistor and generally cannot be repaired via software. However, if the subpixel is merely "stuck" (frozen in a solid red, green, or blue state), you can often revive it using an online high-speed pixel flasher or through gentle targeted pressure with a damp microfiber cloth. If a dead pixel persists on a newly purchased device, check the manufacturer's warranty for an RMA replacement.
+            A genuinely dead pixel is caused by a permanently damaged or unpowered Thin-Film Transistor and <strong class="text-ink">cannot be repaired by software, scripts, or online tools</strong>. However, if a subpixel is merely "stuck" (frozen in a solid red, green, or blue state), you can attempt to dislodge it using our non-invasive online subpixel flasher. <strong class="text-accent-red">Do not apply physical pressure, finger force, or screen massage</strong>, as modern display panels are made of micro-thin glass substrates that can easily crack. If dead pixels are present on a newly bought screen, check the manufacturer's warranty for a replacement.
           </p>
         </details>
 
@@ -355,7 +355,7 @@
             <span class="text-mute group-open:rotate-180 transition-transform text-xs">▼</span>
           </summary>
           <p class="mt-3 text-xs sm:text-sm text-mute leading-relaxed">
-            Online tools cannot physically resolder a broken internal transistor. However, online pixel fixers can successfully repair stuck pixels. These tools rapidly flip subpixels between active and inactive states 60 times per second, generating thousands of electrical cycles per minute to agitate and release frozen liquid crystal molecules without requiring downloads.
+            No online tool or software can repair a genuinely dead pixel (a physically severed or blown transistor). However, online tools can help unstick subpixels frozen in an illuminated RGB state. Our tool utilizes the browser's native <code class="font-mono text-ink bg-surface-elevated px-1 py-0.5 rounded text-xs">requestAnimationFrame</code> loop to rapidly cycle primary colors at your screen's hardware refresh rate (60Hz, 120Hz, or 144Hz+), cycling transistor state voltages to potentially free trapped liquid crystals without any physical touching.
           </p>
         </details>
 
