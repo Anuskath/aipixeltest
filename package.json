@@ -8,11 +8,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
-    "deploy": "astro build && wrangler pages deploy dist --project-name=aipixeltest"
+    "deploy": "astro build && wrangler pages deploy dist/client --project-name=aipixeltest --branch=main --commit-dirty=true",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.4.8",
     "@astrojs/sitemap": "^3.7.5",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.12",
