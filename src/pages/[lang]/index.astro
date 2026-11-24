@@ -6,18 +6,10 @@ import StuckPixelFixer from '../../components/StuckPixelFixer.astro';
 import DisplayDiagnostics from '../../components/DisplayDiagnostics.astro';
 import GuideContent from '../../components/GuideContent.astro';
 import Footer from '../../components/Footer.astro';
-import type { SupportedLanguage } from '../../i18n/ui';
+import { nonDefaultLanguages, type SupportedLanguage } from '../../i18n/ui';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'es' } },
-    { params: { lang: 'ja' } },
-    { params: { lang: 'fr' } },
-    { params: { lang: 'de' } },
-    { params: { lang: 'pt' } },
-    { params: { lang: 'ko' } },
-    { params: { lang: 'it' } },
-  ];
+  return nonDefaultLanguages.map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params;

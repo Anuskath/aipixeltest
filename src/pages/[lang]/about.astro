@@ -2,19 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import type { SupportedLanguage } from '../../i18n/ui';
+import { nonDefaultLanguages, type SupportedLanguage } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'es' } },
-    { params: { lang: 'ja' } },
-    { params: { lang: 'fr' } },
-    { params: { lang: 'de' } },
-    { params: { lang: 'pt' } },
-    { params: { lang: 'ko' } },
-    { params: { lang: 'it' } },
-  ];
+  return nonDefaultLanguages.map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params;

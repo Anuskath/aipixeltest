@@ -50,17 +50,17 @@ export function getHreflangAlternates(purePath: string, siteUrl: string = 'https
   const pathSuffix = clean ? `/${clean}` : '';
   const rootPath = clean ? `/${clean}` : '/';
 
-  const alternates = [
+  const alternates: { lang: string; href: string }[] = [
     { lang: 'x-default', href: `${siteUrl}${rootPath}` },
-    { lang: 'en', href: `${siteUrl}${rootPath}` },
-    { lang: 'es', href: `${siteUrl}/es${pathSuffix}/` },
-    { lang: 'ja', href: `${siteUrl}/ja${pathSuffix}/` },
-    { lang: 'fr', href: `${siteUrl}/fr${pathSuffix}/` },
-    { lang: 'de', href: `${siteUrl}/de${pathSuffix}/` },
-    { lang: 'pt', href: `${siteUrl}/pt${pathSuffix}/` },
-    { lang: 'ko', href: `${siteUrl}/ko${pathSuffix}/` },
-    { lang: 'it', href: `${siteUrl}/it${pathSuffix}/` },
   ];
+
+  for (const lang of Object.keys(languages) as SupportedLanguage[]) {
+    if (lang === defaultLang) {
+      alternates.push({ lang: 'en', href: `${siteUrl}${rootPath}` });
+    } else {
+      alternates.push({ lang, href: `${siteUrl}/${lang}${pathSuffix}/` });
+    }
+  }
 
   return alternates;
 }
