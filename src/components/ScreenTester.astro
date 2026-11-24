@@ -1,5 +1,14 @@
 ---
 // ScreenTester.astro - Core interactive display tester & fullscreen HUD with Raycast Design System
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+
+interface Props {
+  currentLang?: SupportedLanguage;
+}
+
+const lang = Astro.props.currentLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="tester" class="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden border-b border-hairline">
@@ -28,17 +37,17 @@
       <!-- Top Badge (Raycast Pill Style) -->
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-hairline text-xs font-mono text-mute">
         <span class="w-2 h-2 rounded-full bg-accent-red"></span>
-        <span>Online Display Diagnostics</span>
+        <span>{t('hero.badge')}</span>
       </div>
 
       <!-- Solid, Professional Display Typography -->
       <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-ink font-sans leading-[1.1]">
-        Dead Pixel Test &<br />
-        <span class="text-ink">Stuck Pixel Fixer</span>
+        {t('hero.title1')}<br />
+        <span class="text-ink">{t('hero.title2')}</span>
       </h1>
 
       <p class="text-sm sm:text-base text-mute leading-relaxed max-w-xl mx-auto font-sans">
-        Inspect monitor, laptop, TV, and smartphone screens in pure fullscreen with solid RGB colors. Spot defective subpixels and revive frozen liquid crystals.
+        {t('hero.subtitle')}
       </p>
 
     </div>
@@ -49,7 +58,7 @@
         💡
       </div>
       <div class="flex-1 text-xs">
-        <strong class="text-ink font-medium">Screen Preparation:</strong> Wipe display with a clean microfiber cloth to avoid confusing surface dust with dead subpixels.
+        <strong class="text-ink font-medium">{t('hero.prep')}</strong> {t('hero.prepText')}
       </div>
     </div>
 
@@ -64,7 +73,7 @@
           data-mode="solid"
         >
           <span class="w-2 h-2 rounded-full bg-accent-red"></span>
-          Solid Colors (RGB)
+          {t('tester.solid')}
         </button>
         <button 
           id="tab-mode-bleed"
@@ -72,7 +81,7 @@
           data-mode="bleed"
         >
           <span class="w-2 h-2 rounded-full bg-stone"></span>
-          Backlight Bleed & Uniformity
+          {t('tester.bleed')}
         </button>
         <button 
           id="tab-mode-gradient"
@@ -80,14 +89,14 @@
           data-mode="gradient"
         >
           <span class="w-2 h-2 rounded-full bg-accent-blue"></span>
-          Color Banding & Gradients
+          {t('tester.gradient')}
         </button>
       </div>
 
       <!-- Color Swatches Grid -->
       <div class="py-5">
         <div class="text-[11px] font-mono uppercase tracking-wider text-mute mb-3 text-center sm:text-left">
-          Select Starting Color Swatch:
+          {t('tester.swatchLabel')}
         </div>
         
         <div id="swatches-container" class="grid grid-cols-4 sm:grid-cols-8 gap-2 sm:gap-2.5">
@@ -146,7 +155,7 @@
           <svg class="w-4 h-4 text-accent-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
           </svg>
-          <span>Launch Fullscreen Test</span>
+          <span>{t('tester.launchBtn')}</span>
           <span class="raycast-kbd ml-1">F11 / F</span>
         </button>
 

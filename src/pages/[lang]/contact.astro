@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import type { SupportedLanguage } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'ja' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'pt' } },
+    { params: { lang: 'ko' } },
+    { params: { lang: 'it' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as SupportedLanguage) || 'en';
+const t = useTranslations(currentLang);
+---
+
+<Layout 
+  title={`${t('footer.contact')} | PixelTest AI`}
+  description="Contact the team at aipixeltest.com. Send inquiries, feature requests, bug reports, or feedback regarding our screen dead pixel test and monitor tools."
+  lang={currentLang}
+>
+  <Header currentLang={currentLang} />
+
+  <main class="py-12 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Title -->
+      <div class="space-y-3 mb-10 pb-8 border-b border-hairline">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-xs font-mono text-accent-blue">
+          <span>Get in Touch</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          {t('footer.contact')}
+        </h1>
+        <p class="text-xs sm:text-sm text-mute font-mono">
+          Have feedback, found a display bug, or want to suggest a new test mode? We'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Left: Contact Details & Info -->
+        <div class="md:col-span-5 space-y-6">
+          <div class="raycast-card p-5 bg-surface space-y-4">
+            <h3 class="text-sm font-semibold text-ink font-sans">Direct Email</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              For general support, media inquiries, or technical bug reports:
+            </p>
+            <div class="font-mono text-xs text-accent-blue select-all bg-surface-elevated p-2 rounded border border-hairline">
+              support@aipixeltest.com
+            </div>
+            <div class="text-[11px] text-stone">
+              Average response time: 24–48 business hours.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Contact Form -->
+        <div class="md:col-span-7">
+          <div class="raycast-card p-6 bg-surface">
+            <form id="contact-form" class="space-y-4">
+              <div>
+                <label for="contact-name" class="block text-xs font-mono uppercase tracking-wider text-mute mb-1.5">
+                  Your Name
+                </label>
+                <input 
+                  type="text" 
+                  id="contact-name" 
+                  name="name" 
+                  required
+                  placeholder="e.g. Alex" 
+                  class="w-full bg-surface-elevated border border-hairline text-ink rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-hairline-strong transition-colors"
+                />
+              </div>
+
+              <div>
+                <label for="contact-email" class="block text-xs font-mono uppercase tracking-wider text-mute mb-1.5">
+                  Email Address
+                </label>
+                <input 
+                  type="email" 
+                  id="contact-email" 
+                  name="email" 
+                  required
+                  placeholder="you@example.com" 
+                  class="w-full bg-surface-elevated border border-hairline text-ink rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-hairline-strong transition-colors"
+                />
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-mono uppercase tracking-wider text-mute mb-1.5">
+                  Message
+                </label>
+                <textarea 
+                  id="contact-message" 
+                  name="message" 
+                  rows="4" 
+                  required
+                  placeholder="How can we help you?" 
+                  class="w-full bg-surface-elevated border border-hairline text-ink rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-hairline-strong transition-colors resize-none"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                id="contact-submit-btn"
+                class="raycast-pill-btn w-full !py-2.5 text-xs font-semibold cursor-pointer active:scale-[0.99]"
+              >
+                Send via Email App ✉️
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer currentLang={currentLang} />
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = (document.getElementById('contact-name') as HTMLInputElement)?.value || '';
+    const email = (document.getElementById('contact-email') as HTMLInputElement)?.value || '';
+    const message = (document.getElementById('contact-message') as HTMLTextAreaElement)?.value || '';
+
+    const subject = `[PixelTest AI] Inquiry from ${name}`;
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n---\nSent via aipixeltest.com`;
+    const mailtoUrl = `mailto:support@aipixeltest.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
+  });
+</script>

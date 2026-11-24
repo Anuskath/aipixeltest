@@ -1,12 +1,23 @@
 ---
-// Header.astro - Raycast primary navigation with Mobile Menu & Theme Switcher
+// Header.astro - Raycast primary navigation with Mobile Menu, Language Switcher & Theme Switcher
+import LanguagePicker from './LanguagePicker.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+
+interface Props {
+  currentLang?: SupportedLanguage;
+}
+
+const lang = Astro.props.currentLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-canvas/85 border-b border-hairline transition-colors">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
     
     <!-- Brand Logo with Custom Diagnostic Monitor Icon -->
-    <a href="/" class="flex items-center gap-2.5 group">
+    <a href={translatePath('/')} class="flex items-center gap-2.5 group">
       <div class="w-8 h-8 rounded-lg bg-surface-elevated border border-hairline flex items-center justify-center p-1.5 transition-colors group-hover:border-accent-red/60 shadow-xs">
         <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
           <rect x="4" y="6" width="56" height="42" rx="6" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="3"/>
@@ -23,25 +34,28 @@
     </a>
 
     <!-- Desktop Nav Links -->
-    <nav class="hidden md:flex items-center gap-6 text-xs sm:text-sm font-medium text-mute">
-      <a href="/#tester" class="hover:text-ink transition-colors">Screen Test</a>
-      <a href="/#fixer" class="hover:text-ink transition-colors flex items-center gap-1.5">
+    <nav class="hidden md:flex items-center gap-5 text-xs sm:text-sm font-medium text-mute">
+      <a href={translatePath('/#tester')} class="hover:text-ink transition-colors">{t('nav.tester')}</a>
+      <a href={translatePath('/#fixer')} class="hover:text-ink transition-colors flex items-center gap-1.5">
         <span class="w-1.5 h-1.5 rounded-full bg-accent-green"></span>
-        Pixel Fixer
+        {t('nav.fixer')}
       </a>
-      <a href="/#diagnostics" class="hover:text-ink transition-colors">Display Specs</a>
-      <a href="/#warranty-guide" class="hover:text-ink transition-colors">Warranty</a>
-      <a href="/#faq" class="hover:text-ink transition-colors">FAQs</a>
+      <a href={translatePath('/#diagnostics')} class="hover:text-ink transition-colors">{t('nav.diagnostics')}</a>
+      <a href={translatePath('/#warranty-guide')} class="hover:text-ink transition-colors">{t('nav.warranty')}</a>
+      <a href={translatePath('/#faq')} class="hover:text-ink transition-colors">{t('nav.faq')}</a>
     </nav>
 
-    <!-- Header Actions (Resolution Pill, Theme Toggle, Start Test Pill, Mobile Menu Button) -->
-    <div class="flex items-center gap-2 sm:gap-3">
+    <!-- Header Actions (Resolution Pill, Language Picker, Theme Toggle, Start Test Pill, Mobile Menu Button) -->
+    <div class="flex items-center gap-2 sm:gap-2.5">
       
       <!-- Live Screen Resolution Pill (Desktop) -->
-      <div id="header-res-pill" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-surface border border-hairline rounded-md text-charcoal">
+      <div id="header-res-pill" class="hidden xl:flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-surface border border-hairline rounded-md text-charcoal">
         <span class="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse"></span>
-        <span id="header-res-text">Detecting...</span>
+        <span id="header-res-text">{t('nav.detecting')}</span>
       </div>
+
+      <!-- Language Selector Dropdown -->
+      <LanguagePicker currentLang={lang} />
 
       <!-- Theme Switcher Button (Dark / Light Mode) -->
       <button 
@@ -72,8 +86,7 @@
         class="raycast-pill-btn !py-1.5 !px-3 sm:!px-3.5 !text-xs font-medium"
         title="Start Fullscreen Test"
       >
-        <span>Start</span>
-        <span class="hidden sm:inline">Test</span>
+        <span>{t('nav.startTest')}</span>
         <span class="hidden sm:inline-flex raycast-kbd !h-3.5 !min-w-[1rem] !px-1 text-[9px] ml-0.5">F</span>
       </button>
 
@@ -100,32 +113,32 @@
   <!-- Mobile Dropdown Navigation Drawer -->
   <div id="mobile-drawer" class="hidden md:hidden border-b border-hairline bg-surface/95 backdrop-blur-xl px-4 py-4 space-y-3">
     <div class="grid grid-cols-2 gap-2 text-xs font-medium">
-      <a href="/#tester" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
-        <span>🖥️</span> Screen Test
+      <a href={translatePath('/#tester')} class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>🖥️</span> {t('nav.tester')}
       </a>
-      <a href="/#fixer" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
-        <span>⚡</span> Pixel Fixer
+      <a href={translatePath('/#fixer')} class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>⚡</span> {t('nav.fixer')}
       </a>
-      <a href="/#diagnostics" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
-        <span>🔍</span> Specs
+      <a href={translatePath('/#diagnostics')} class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>🔍</span> {t('nav.diagnostics')}
       </a>
-      <a href="/#warranty-guide" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
-        <span>📜</span> Warranty
+      <a href={translatePath('/#warranty-guide')} class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>📜</span> {t('nav.warranty')}
       </a>
-      <a href="/#faq" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
-        <span>❓</span> FAQs
+      <a href={translatePath('/#faq')} class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>❓</span> {t('nav.faq')}
       </a>
-      <a href="/about" class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
-        <span>ℹ️</span> About Us
+      <a href={translatePath('/about')} class="mobile-nav-link p-2.5 rounded-lg bg-surface-elevated text-ink border border-hairline flex items-center gap-2">
+        <span>ℹ️</span> {t('footer.about')}
       </a>
     </div>
 
     <div class="pt-2 border-t border-hairline flex items-center justify-between text-[11px] text-mute font-mono">
-      <a href="/privacy" class="hover:text-ink">Privacy Policy</a>
+      <a href={translatePath('/privacy')} class="hover:text-ink">{t('footer.privacy')}</a>
       <span>•</span>
-      <a href="/terms" class="hover:text-ink">Terms</a>
+      <a href={translatePath('/terms')} class="hover:text-ink">{t('footer.terms')}</a>
       <span>•</span>
-      <a href="/contact" class="hover:text-ink">Contact Us</a>
+      <a href={translatePath('/contact')} class="hover:text-ink">{t('footer.contact')}</a>
     </div>
   </div>
 </header>

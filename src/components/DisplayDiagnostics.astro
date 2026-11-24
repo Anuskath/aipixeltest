@@ -1,5 +1,14 @@
 ---
 // DisplayDiagnostics.astro - Live Hardware & Screen Specification Inspector
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+
+interface Props {
+  currentLang?: SupportedLanguage;
+}
+
+const lang = Astro.props.currentLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="diagnostics" class="py-16 border-b border-hairline bg-canvas relative">
@@ -8,13 +17,13 @@
     <div class="text-center max-w-2xl mx-auto mb-10">
       <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-blue/10 border border-accent-blue/20 text-xs font-mono text-accent-blue mb-3">
         <span class="w-1.5 h-1.5 rounded-full bg-accent-blue"></span>
-        Hardware Inspection
+        {t('diag.badge')}
       </div>
       <h2 class="text-3xl font-bold tracking-tight text-ink font-sans">
-        Live Display Specifications
+        {t('diag.title')}
       </h2>
       <p class="mt-2 text-mute text-sm sm:text-base">
-        Hardware values automatically detected from your browser environment.
+        {t('diag.subtitle')}
       </p>
     </div>
 
@@ -23,7 +32,7 @@
       
       <!-- Native Resolution -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">Screen Resolution</div>
+        <div class="text-xs font-mono text-mute">{t('diag.res')}</div>
         <div id="diag-resolution" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
           Detecting...
         </div>
@@ -32,7 +41,7 @@
 
       <!-- Viewport Resolution -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">CSS Viewport Size</div>
+        <div class="text-xs font-mono text-mute">{t('diag.viewport')}</div>
         <div id="diag-viewport" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
           Detecting...
         </div>
@@ -41,7 +50,7 @@
 
       <!-- Device Pixel Ratio (DPR) -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">Device Pixel Ratio</div>
+        <div class="text-xs font-mono text-mute">{t('diag.dpr')}</div>
         <div id="diag-dpr" class="text-xl sm:text-2xl font-bold font-mono text-accent-yellow mt-2">
           1.0x
         </div>
@@ -50,7 +59,7 @@
 
       <!-- Refresh Rate Estimator -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">Refresh Rate</div>
+        <div class="text-xs font-mono text-mute">{t('diag.refresh')}</div>
         <div id="diag-fps" class="text-xl sm:text-2xl font-bold font-mono text-accent-green mt-2">
           Calculating...
         </div>
@@ -59,7 +68,7 @@
 
       <!-- Color Depth -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">Color Depth</div>
+        <div class="text-xs font-mono text-mute">{t('diag.depth')}</div>
         <div id="diag-color-depth" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
           24-bit
         </div>
@@ -68,7 +77,7 @@
 
       <!-- Wide Color Gamut (DCI-P3) -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">Color Gamut</div>
+        <div class="text-xs font-mono text-mute">{t('diag.gamut')}</div>
         <div id="diag-gamut" class="text-xl sm:text-2xl font-bold font-mono text-accent-blue mt-2">
           Checking...
         </div>
@@ -77,7 +86,7 @@
 
       <!-- Dynamic Range (HDR) -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">HDR Dynamic Range</div>
+        <div class="text-xs font-mono text-mute">{t('diag.hdr')}</div>
         <div id="diag-hdr" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
           Standard (SDR)
         </div>
@@ -86,7 +95,7 @@
 
       <!-- Touch Support -->
       <div class="raycast-card p-4 sm:p-5 flex flex-col justify-between">
-        <div class="text-xs font-mono text-mute">Touch Capability</div>
+        <div class="text-xs font-mono text-mute">{t('diag.touch')}</div>
         <div id="diag-touch" class="text-xl sm:text-2xl font-bold font-mono text-ink mt-2">
           Checking...
         </div>

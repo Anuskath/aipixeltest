@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import type { SupportedLanguage } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'ja' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'pt' } },
+    { params: { lang: 'ko' } },
+    { params: { lang: 'it' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as SupportedLanguage) || 'en';
+const t = useTranslations(currentLang);
+---
+
+<Layout 
+  title={`${t('footer.terms')} | PixelTest AI`}
+  description="Terms and Conditions of use for aipixeltest.com. Review our usage guidelines, hardware repair disclaimers, and warranty reference policies."
+  lang={currentLang}
+>
+  <Header currentLang={currentLang} />
+
+  <main class="py-12 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Title -->
+      <div class="space-y-3 mb-10 pb-8 border-b border-hairline">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone/40 border border-hairline text-xs font-mono text-mute">
+          <span>Legal Agreement</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          {t('footer.terms')}
+        </h1>
+        <p class="text-xs sm:text-sm text-mute font-mono">
+          Last Updated: November 2026
+        </p>
+      </div>
+
+      <!-- Content -->
+      <article class="space-y-8 text-xs sm:text-sm text-body leading-relaxed">
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">1. Acceptance of Terms</h2>
+          <p>
+            By accessing or using <strong class="text-ink">aipixeltest.com</strong>, you agree to be bound by these Terms and Conditions.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">2. Screen Safety & Non-Contact Advisory</h2>
+          <div class="p-4 rounded-lg bg-accent-red/10 border border-accent-red/30 space-y-2">
+            <h3 class="font-bold text-accent-red text-xs uppercase tracking-wider font-mono">⚠️ Hardware Safety Notice</h3>
+            <p class="text-xs text-mute leading-relaxed">
+              PixelTest AI is strictly a non-invasive, software-only display diagnostic suite. We strongly advise against applying any physical pressure, screen massage, or rubbing to your display panel.
+            </p>
+          </div>
+        </section>
+      </article>
+
+    </div>
+  </main>
+
+  <Footer currentLang={currentLang} />
+</Layout>

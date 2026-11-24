@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ScreenTester from '../../components/ScreenTester.astro';
+import StuckPixelFixer from '../../components/StuckPixelFixer.astro';
+import DisplayDiagnostics from '../../components/DisplayDiagnostics.astro';
+import GuideContent from '../../components/GuideContent.astro';
+import Footer from '../../components/Footer.astro';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'ja' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'pt' } },
+    { params: { lang: 'ko' } },
+    { params: { lang: 'it' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as SupportedLanguage) || 'en';
+---
+
+<Layout lang={currentLang}>
+  <Header currentLang={currentLang} />
+  <main>
+    <ScreenTester currentLang={currentLang} />
+    <StuckPixelFixer currentLang={currentLang} />
+    <DisplayDiagnostics currentLang={currentLang} />
+    <GuideContent currentLang={currentLang} />
+  </main>
+  <Footer currentLang={currentLang} />
+</Layout>

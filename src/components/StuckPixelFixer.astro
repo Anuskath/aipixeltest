@@ -1,5 +1,14 @@
 ---
 // StuckPixelFixer.astro - Dedicated standalone stuck pixel reviver panel
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+
+interface Props {
+  currentLang?: SupportedLanguage;
+}
+
+const lang = Astro.props.currentLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="fixer" class="py-16 md:py-24 border-b border-hairline bg-surface/30 relative">
@@ -9,13 +18,13 @@
       <div>
         <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-green/10 border border-accent-green/20 text-xs font-mono text-accent-green mb-3">
           <span class="w-1.5 h-1.5 rounded-full bg-accent-green"></span>
-          Subpixel Stimulation Utility
+          {t('fixer.badge')}
         </div>
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink font-sans">
-          Stuck Pixel Reviver
+          {t('fixer.title')}
         </h2>
         <p class="mt-1.5 text-mute text-xs sm:text-sm max-w-xl">
-          Uses native <code class="text-ink font-mono text-[11px] bg-surface-elevated px-1 py-0.5 rounded">requestAnimationFrame</code> cycles to alternate subpixel transistor voltages at your monitor's refresh rate. Designed to stimulate seized liquid crystals without physical contact.
+          {t('fixer.subtitle')}
         </p>
       </div>
 
@@ -25,7 +34,7 @@
           rAF
         </div>
         <div class="text-xs text-mute leading-tight">
-          Hardware-safe cycle<br /><span class="text-ink font-sans font-medium">For stuck subpixels only</span>
+          {t('fixer.safeCycle')}<br /><span class="text-ink font-sans font-medium">{t('fixer.forStuckOnly')}</span>
         </div>
       </div>
     </div>
@@ -34,7 +43,7 @@
     <div class="mb-6 p-3.5 rounded-lg bg-surface border border-hairline flex items-start gap-3 text-xs text-mute">
       <span class="text-accent-yellow text-sm shrink-0 mt-0.5">ℹ️</span>
       <div class="leading-relaxed">
-        <strong class="text-ink font-medium">Important Technical Distinction:</strong> This tool only attempts to revive <strong class="text-ink">stuck subpixels</strong> (pixels frozen on red, green, or blue). A genuinely <strong class="text-ink">dead pixel</strong> (an unpowered, permanently dark transistor) is a permanent hardware defect and <span class="text-accent-red font-medium">cannot be repaired by software or flashing</span>. Never apply physical force or pressure to your screen.
+        <strong class="text-ink font-medium">{t('fixer.noticeTitle')}</strong> {t('fixer.noticeText')}
       </div>
     </div>
 
@@ -55,24 +64,24 @@
               <div class="w-10 h-10 rounded-lg bg-surface-elevated border border-hairline flex items-center justify-center text-accent-green text-lg">
                 ⚡
               </div>
-              <div class="text-sm font-semibold text-ink">Pixel Fixer Ready (Off by Default)</div>
+              <div class="text-sm font-semibold text-ink">{t('fixer.readyTitle')}</div>
               <div class="text-xs text-mute max-w-xs">
-                Select your preferred duration and click Start. Drag or place this window directly over the affected subpixel.
+                {t('fixer.readyText')}
               </div>
             </div>
 
             <!-- Active Running Indicator Badge -->
             <div id="fixer-active-badge" class="absolute top-2.5 right-2.5 hidden px-2 py-0.5 rounded bg-black/80 border border-accent-green/40 text-[10px] font-mono text-accent-green flex items-center gap-1.5 backdrop-blur">
               <span class="w-1.5 h-1.5 rounded-full bg-accent-green animate-ping"></span>
-              <span id="fixer-fps-text">CYCLING (Native rAF)</span>
+              <span id="fixer-fps-text">{t('fixer.runningBadge')}</span>
             </div>
           </div>
 
           <!-- Timer Countdown Display -->
           <div class="mt-3.5 flex items-center gap-3 text-xs font-mono text-mute">
-            <div>Elapsed: <span id="time-elapsed" class="text-ink">00:00</span></div>
+            <div>{t('fixer.elapsed')} <span id="time-elapsed" class="text-ink">00:00</span></div>
             <div>•</div>
-            <div>Remaining: <span id="time-remaining" class="text-accent-green font-semibold">10:00</span></div>
+            <div>{t('fixer.remaining')} <span id="time-remaining" class="text-accent-green font-semibold">10:00</span></div>
           </div>
         </div>
 
@@ -82,17 +91,17 @@
           <!-- Duration Selector -->
           <div>
             <label class="block text-[11px] font-mono uppercase tracking-wider text-mute mb-2">
-              Recommended Session Duration:
+              {t('fixer.durationLabel')}
             </label>
             <div class="grid grid-cols-3 gap-2">
               <button class="fixer-timer-btn active py-1.5 px-2 rounded-lg bg-surface-elevated text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="10">
-                10 Mins <span class="block text-[10px] text-mute">Standard</span>
+                {t('fixer.10mins')} <span class="block text-[10px] text-mute">{t('fixer.10minsSub')}</span>
               </button>
               <button class="fixer-timer-btn py-1.5 px-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="30">
-                30 Mins <span class="block text-[10px] text-mute">Extended</span>
+                {t('fixer.30mins')} <span class="block text-[10px] text-mute">{t('fixer.30minsSub')}</span>
               </button>
               <button class="fixer-timer-btn py-1.5 px-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer text-center" data-minutes="60">
-                60 Mins <span class="block text-[10px] text-mute">Maximum</span>
+                {t('fixer.60mins')} <span class="block text-[10px] text-mute">{t('fixer.60minsSub')}</span>
               </button>
             </div>
           </div>
@@ -100,16 +109,16 @@
           <!-- Stimulation Mode -->
           <div>
             <label class="block text-[11px] font-mono uppercase tracking-wider text-mute mb-2">
-              Stimulation Algorithm:
+              {t('fixer.modeLabel')}
             </label>
             <div class="grid grid-cols-2 gap-2 text-xs">
               <button class="fixer-mode-btn active py-2 px-3 rounded-lg bg-surface-elevated text-ink border border-hairline transition-all cursor-pointer text-left" data-pattern="rgb">
-                <span class="font-medium block">RGB Static Noise</span>
-                <span class="text-[10px] text-mute">Randomized subpixels</span>
+                <span class="font-medium block">{t('fixer.rgbNoise')}</span>
+                <span class="text-[10px] text-mute">{t('fixer.rgbNoiseSub')}</span>
               </button>
               <button class="fixer-mode-btn py-2 px-3 rounded-lg bg-surface text-mute hover:text-ink border border-hairline transition-all cursor-pointer text-left" data-pattern="strobe">
-                <span class="font-medium block">Solid Strobe</span>
-                <span class="text-[10px] text-mute">Cycles R→G→B→W</span>
+                <span class="font-medium block">{t('fixer.solidStrobe')}</span>
+                <span class="text-[10px] text-mute">{t('fixer.solidStrobeSub')}</span>
               </button>
             </div>
           </div>
@@ -120,7 +129,7 @@
               id="btn-start-standalone-fixer" 
               class="raycast-pill-btn flex-1 !bg-accent-green hover:!bg-emerald-400 !text-black font-semibold !py-2.5 !text-xs cursor-pointer"
             >
-              <span>Start Fixer</span>
+              <span>{t('fixer.startBtn')}</span>
               <span class="raycast-kbd !bg-black/20 !border-black/30 !text-black !h-3.5 !min-w-[1rem] text-[9px]">▶</span>
             </button>
             <button 
@@ -128,17 +137,17 @@
               class="px-4 py-2 rounded-full bg-surface-elevated hover:bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline transition-all cursor-pointer disabled:opacity-40"
               disabled
             >
-              Stop <span class="text-[10px] opacity-70">(Esc)</span>
+              {t('fixer.stopBtn')} <span class="text-[10px] opacity-70">(Esc)</span>
             </button>
           </div>
 
           <!-- Prominent Safety Notice Box -->
           <div class="p-3 rounded-lg bg-surface-elevated border border-hairline text-[11px] text-mute leading-relaxed space-y-1">
             <div class="flex items-center gap-1.5 text-accent-yellow font-medium text-xs">
-              <span>⚠️</span> Photosensitivity Safety Reminder
+              <span>⚠️</span> {t('fixer.safetyReminder')}
             </div>
             <p>
-              This tool displays rapid color flashing. Look away from the screen while running. Do not use if you have light-triggered migraines or photosensitive epilepsy. Press <span class="font-mono text-ink bg-surface px-1 py-0.5 rounded border border-hairline text-[10px]">Esc</span> at any time to instantly stop.
+              {t('fixer.safetyText')}
             </p>
           </div>
 
@@ -156,19 +165,19 @@
             ⚠️
           </div>
           <div>
-            <h3 class="text-base font-bold text-ink">Photosensitivity Warning</h3>
-            <p class="text-xs text-mute">Please confirm before activating rapid flashing</p>
+            <h3 class="text-base font-bold text-ink">{t('fixer.modalTitle')}</h3>
+            <p class="text-xs text-mute">{t('fixer.modalSub')}</p>
           </div>
         </div>
 
         <div class="text-xs text-body leading-relaxed space-y-2 border-y border-hairline py-3">
           <p>
-            The Stuck Pixel Reviver flashes RGB subpixels at high frequency (synchronized with your monitor's refresh rate, up to 144Hz+) to stimulate liquid crystals.
+            {t('fixer.modalDesc')}
           </p>
           <ul class="list-disc pl-4 space-y-1 text-mute">
-            <li><strong>Do not use</strong> if you or anyone in the room has photosensitive epilepsy or light sensitivities.</li>
-            <li>Look away or minimize the window focus once aligned over the stuck pixel.</li>
-            <li>You can press <strong class="text-ink">ESC</strong> or click <strong class="text-ink">Stop</strong> at any time to halt immediately.</li>
+            <li><strong>{t('fixer.modalLi1')}</strong></li>
+            <li>{t('fixer.modalLi2')}</li>
+            <li>{t('fixer.modalLi3')}</li>
           </ul>
         </div>
 
@@ -177,13 +186,13 @@
             id="btn-safety-cancel"
             class="px-4 py-2 rounded-lg bg-surface text-mute hover:text-ink text-xs font-medium border border-hairline cursor-pointer"
           >
-            Cancel
+            {t('fixer.modalCancel')}
           </button>
           <button 
             id="btn-safety-confirm"
             class="px-4 py-2 rounded-lg bg-accent-green hover:bg-emerald-400 text-black text-xs font-semibold cursor-pointer shadow-xs"
           >
-            I Understand, Start Fixer
+            {t('fixer.modalConfirm')}
           </button>
         </div>
       </div>

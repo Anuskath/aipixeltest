@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import type { SupportedLanguage } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'ja' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'de' } },
+    { params: { lang: 'pt' } },
+    { params: { lang: 'ko' } },
+    { params: { lang: 'it' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as SupportedLanguage) || 'en';
+const t = useTranslations(currentLang);
+---
+
+<Layout 
+  title={`${t('footer.about')} | PixelTest AI`}
+  description="Learn about PixelTest AI (aipixeltest.com) - our mission to provide modern, fast, zero-bloat display diagnostics and stuck pixel repair tools."
+  lang={currentLang}
+>
+  <Header currentLang={currentLang} />
+
+  <main class="py-12 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Title -->
+      <div class="space-y-3 mb-10 pb-8 border-b border-hairline">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-green/10 border border-accent-green/20 text-xs font-mono text-accent-green">
+          <span>Our Story & Mission</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink font-sans">
+          {t('footer.about')} - PixelTest.AI
+        </h1>
+        <p class="text-xs sm:text-sm text-mute font-mono">
+          Engineered for modern high-refresh gaming monitors, OLED screens, laptops, and mobile displays.
+        </p>
+      </div>
+
+      <!-- Content -->
+      <article class="space-y-8 text-xs sm:text-sm text-body leading-relaxed">
+        
+        <section class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">Modern Display Diagnostics</h2>
+          <p>
+            When unboxing a brand-new monitor or buying a refurbished smartphone, the first thing any tech enthusiast does is check the panel for dead subpixels. We created <strong class="text-ink">PixelTest AI</strong> to provide instant, hardware-accurate testing without paywalls, downloads, or cluttered pop-ups.
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-mute">
+            <li>Compatible with high-DPI Retina displays and wide DCI-P3 color gamuts.</li>
+            <li>Smooth touch gestures for smartphones and tablets.</li>
+            <li>Targeted subpixel cycling that minimizes eye strain and eliminates risky physical panel pressure.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-lg sm:text-xl font-bold text-ink font-sans">Our Mission: Modern, Professional Utility</h2>
+          <p>
+            <strong class="text-ink">PixelTest AI</strong> was founded to redefine display testing with a modern developer-first philosophy. We believe basic hardware diagnostics should be:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="raycast-card p-4 bg-surface">
+              <div class="font-bold text-ink font-mono text-xs mb-1">⚡ Fast & Zero-Install</div>
+              <p class="text-xs text-mute">Instant browser execution without downloads, executables, or extensions.</p>
+            </div>
+            <div class="raycast-card p-4 bg-surface">
+              <div class="font-bold text-ink font-mono text-xs mb-1">🔒 100% Client-Side</div>
+              <p class="text-xs text-mute">Zero data collection, zero registration, and zero trackers.</p>
+            </div>
+          </div>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <Footer currentLang={currentLang} />
+</Layout>

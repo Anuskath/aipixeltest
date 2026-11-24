@@ -1,0 +1,118 @@
+---
+// LanguagePicker.astro - Raycast-styled Language Selector with Flag Icons
+import { languages, type SupportedLanguage } from '../i18n/ui';
+import { getLangFromUrl, useTranslatedPath, getCleanPathname } from '../i18n/utils';
+
+interface Props {
+  currentLang?: SupportedLanguage;
+  class?: string;
+}
+
+const lang = Astro.props.currentLang || getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const purePath = getCleanPathname(Astro.url);
+const currentLangConfig = languages[lang] || languages.en;
+---
+
+<div class={`relative inline-block text-left language-picker-dropdown ${Astro.props.class || ''}`}>
+  <!-- Toggle Button -->
+  <button
+    type="button"
+    class="lang-picker-toggle inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface hover:bg-surface-elevated border border-hairline text-ink text-xs font-mono font-medium transition-all cursor-pointer focus:outline-none focus:border-hairline-strong shadow-2xs"
+    aria-expanded="false"
+    aria-haspopup="true"
+    title="Change Language"
+  >
+    <span class="text-sm leading-none">{currentLangConfig.flag}</span>
+    <span class="hidden sm:inline-block">{currentLangConfig.code}</span>
+    <svg class="w-3 h-3 text-mute transition-transform chevron-icon" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div
+    class="lang-picker-menu hidden absolute right-0 mt-1.5 w-44 rounded-xl bg-surface-elevated border border-hairline shadow-xl py-1.5 z-50 text-xs backdrop-blur-md transition-all divide-y divide-hairline"
+    role="menu"
+  >
+    <div class="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-mute">
+      Select Language
+    </div>
+    <div class="py-1">
+      {Object.entries(languages).map(([code, config]) => {
+        const isCurrent = code === lang;
+        const targetUrl = translatePath(purePath, code as SupportedLanguage);
+        return (
+          <a
+            href={targetUrl}
+            class={`flex items-center justify-between px-3 py-2 text-xs transition-colors hover:bg-surface ${
+              isCurrent ? 'text-accent-red font-semibold bg-surface/50' : 'text-ink font-normal'
+            }`}
+            role="menuitem"
+          >
+            <span class="flex items-center gap-2">
+              <span class="text-sm leading-none">{config.flag}</span>
+              <span class="font-sans">{config.label}</span>
+            </span>
+            <span class="text-[10px] font-mono text-mute">{config.code}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupLanguagePickers() {
+    const pickers = document.querySelectorAll('.language-picker-dropdown');
+    
+    pickers.forEach((picker) => {
+      const toggleBtn = picker.querySelector('.lang-picker-toggle') as HTMLButtonElement | null;
+      const menu = picker.querySelector('.lang-picker-menu') as HTMLElement | null;
+      const chevron = picker.querySelector('.chevron-icon') as HTMLElement | null;
+
+      if (!toggleBtn || !menu) return;
+
+      function openMenu() {
+        menu?.classList.remove('hidden');
+        toggleBtn?.setAttribute('aria-expanded', 'true');
+        chevron?.classList.add('rotate-180');
+      }
+
+      function closeMenu() {
+        menu?.classList.add('hidden');
+        toggleBtn?.setAttribute('aria-expanded', 'false');
+        chevron?.classList.remove('rotate-180');
+      }
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !menu.classList.contains('hidden');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          // Close other open pickers first
+          document.querySelectorAll('.lang-picker-menu').forEach((m) => m.classList.add('hidden'));
+          document.querySelectorAll('.chevron-icon').forEach((c) => c.classList.remove('rotate-180'));
+          openMenu();
+        }
+      });
+
+      // Close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!picker.contains(e.target as Node)) {
+          closeMenu();
+        }
+      });
+    });
+  }
+
+  // Setup on page load and on client routing
+  setupLanguagePickers();
+  document.addEventListener('astro:page-load', setupLanguagePickers);
+</script>

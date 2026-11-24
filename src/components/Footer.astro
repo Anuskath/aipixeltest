@@ -1,5 +1,15 @@
 ---
-// Footer.astro - Clean Raycast footer with legal & trust links
+// Footer.astro - Clean Raycast footer with legal & trust links (Multilingual)
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+
+interface Props {
+  currentLang?: SupportedLanguage;
+}
+
+const lang = Astro.props.currentLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <footer class="py-12 border-t border-hairline bg-canvas text-mute text-xs font-mono transition-colors">
@@ -8,28 +18,28 @@
       
       <!-- Left: Brand & Tagline -->
       <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
-        <a href="/" class="flex items-center gap-2 group">
+        <a href={translatePath('/')} class="flex items-center gap-2 group">
           <div class="w-5 h-5 rounded bg-surface-elevated border border-hairline flex items-center justify-center">
             <div class="w-2 h-2 rounded-xs bg-accent-red"></div>
           </div>
           <span class="font-sans font-bold text-ink text-sm">PixelTest<span class="text-accent-red">.AI</span></span>
         </a>
         <span class="hidden sm:inline text-stone">•</span>
-        <span class="text-charcoal font-sans text-xs">Free, zero-bloat display diagnostics & dead pixel tester.</span>
+        <span class="text-charcoal font-sans text-xs">{t('footer.tagline')}</span>
       </div>
 
       <!-- Quick Nav Links -->
       <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
-        <a href="/#tester" class="hover:text-ink transition-colors">Screen Test</a>
-        <a href="/#fixer" class="hover:text-ink transition-colors">Pixel Fixer</a>
-        <a href="/#diagnostics" class="hover:text-ink transition-colors">Display Specs</a>
-        <a href="/#warranty-guide" class="hover:text-ink transition-colors">Warranty</a>
-        <a href="/#faq" class="hover:text-ink transition-colors">FAQ</a>
+        <a href={translatePath('/#tester')} class="hover:text-ink transition-colors">{t('nav.tester')}</a>
+        <a href={translatePath('/#fixer')} class="hover:text-ink transition-colors">{t('nav.fixer')}</a>
+        <a href={translatePath('/#diagnostics')} class="hover:text-ink transition-colors">{t('nav.diagnostics')}</a>
+        <a href={translatePath('/#warranty-guide')} class="hover:text-ink transition-colors">{t('nav.warranty')}</a>
+        <a href={translatePath('/#faq')} class="hover:text-ink transition-colors">{t('nav.faq')}</a>
         <span class="text-stone">|</span>
-        <a href="/about" class="hover:text-ink transition-colors">About Us</a>
-        <a href="/privacy" class="hover:text-ink transition-colors">Privacy Policy</a>
-        <a href="/terms" class="hover:text-ink transition-colors">Terms</a>
-        <a href="/contact" class="hover:text-ink transition-colors">Contact</a>
+        <a href={translatePath('/about')} class="hover:text-ink transition-colors">{t('footer.about')}</a>
+        <a href={translatePath('/privacy')} class="hover:text-ink transition-colors">{t('footer.privacy')}</a>
+        <a href={translatePath('/terms')} class="hover:text-ink transition-colors">{t('footer.terms')}</a>
+        <a href={translatePath('/contact')} class="hover:text-ink transition-colors">{t('footer.contact')}</a>
       </div>
 
     </div>
@@ -37,14 +47,14 @@
     <!-- Bottom Disclaimer Row -->
     <div class="mt-8 pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-stone text-[11px]">
       <div>
-        © {new Date().getFullYear()} aipixeltest.com. All rights reserved. Free browser utility.
+        © {new Date().getFullYear()} aipixeltest.com. {t('footer.rights')}
       </div>
       <div class="flex items-center gap-4">
-        <span>No cookies</span>
+        <span>{t('footer.noCookies')}</span>
         <span>•</span>
-        <span>No tracking</span>
+        <span>{t('footer.noTracking')}</span>
         <span>•</span>
-        <span>100% Client-Side</span>
+        <span>{t('footer.clientSide')}</span>
       </div>
     </div>
   </div>
